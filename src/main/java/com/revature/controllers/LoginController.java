@@ -15,7 +15,7 @@ public class LoginController {
 
     private UserRepository logRepo;
     @Autowired
-    public LoginController(UserRepository authRepo) {
+    public LoginController(UserRepository logRepo) {
         this.logRepo = logRepo;
     }
 
