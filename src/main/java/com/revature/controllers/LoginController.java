@@ -20,10 +20,10 @@ public class LoginController {
         this.logRepo = logRepo;
     }
 
-    /*@PostMapping(consumes = "application/json", produces = "application/json")
+   /* @PostMapping(consumes = "application/json", produces = "application/json")
     public ResponseEntity<User> loginUser (@RequestBody User u){
         return ResponseEntity.ok(logRepo.save(u));
-    }
+    }*/
 
     @PostMapping("/login")
     public String response(@RequestBody User u){
@@ -34,7 +34,7 @@ public class LoginController {
     @GetMapping
     public ResponseEntity<List<User>> getUsers(){
         return ResponseEntity.ok(logRepo.findAll());
-    }*/
+    }
 
 
 

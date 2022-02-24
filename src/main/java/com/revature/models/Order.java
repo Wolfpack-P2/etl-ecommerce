@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.sql.Timestamp;
 
-@Entity
-@Table
+@Entity 
+@Table(name = "orders")
 @NoArgsConstructor @AllArgsConstructor @Data
 public class Order {
 
@@ -30,4 +30,6 @@ public class Order {
     private String ecommerce_website_name;
     private Character payment_txn_success;
     private String failure_reason;
+
 }
+
