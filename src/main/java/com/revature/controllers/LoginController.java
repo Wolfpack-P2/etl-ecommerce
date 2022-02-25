@@ -20,15 +20,22 @@ public class LoginController {
         this.logRepo = logRepo;
     }
 
-   /* @PostMapping(consumes = "application/json", produces = "application/json")
+   /* @PostMapping
     public ResponseEntity<User> loginUser (@RequestBody User u){
         return ResponseEntity.ok(logRepo.save(u));
     }*/
 
-    @PostMapping("/login")
-    public String response(@RequestBody User u){
+    @PostMapping(consumes = "application/json", produces = "application/json")
+    public User response(@RequestBody User u){
         System.out.println("inside post");
-        return "hello world";
+        // get user from db by id, check username and password, return user
+        User user = logRepo.findByUsername(u.getUsername());
+        System.out.println(user);
+        if (user != null && u.getPassword().equals(user.getPassword())) {
+            return user;
+        }
+        System.out.println("Login failed");
+        return null;
     }
 
     @GetMapping
