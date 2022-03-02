@@ -4,8 +4,6 @@ import com.revature.models.User;
 import com.revature.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,15 +13,11 @@ import java.util.List;
 public class LoginController {
 
     private UserRepository logRepo;
+
     @Autowired
     public LoginController(UserRepository logRepo) {
         this.logRepo = logRepo;
     }
-
-   /* @PostMapping
-    public ResponseEntity<User> loginUser (@RequestBody User u){
-        return ResponseEntity.ok(logRepo.save(u));
-    }*/
 
     @PostMapping(consumes = "application/json", produces = "application/json")
     public User response(@RequestBody User u){
