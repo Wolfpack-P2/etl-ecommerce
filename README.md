@@ -30,7 +30,7 @@ The purpose of the project is to create an ETL (Extract, Transform, Load) and we
 * Note: this app will only work with a connection to Amazon Web Services. The application.properties file will need to be edited to work on your device.
 
 1. Open git bash terminal in desired directory and enter the following: 
-    git clone https://github.com/220103-java-etl/Jacob-Coffin-p1.git
+    git clone https://github.com/Wolfpack-P2/etl-ecommerce.git
 
 2. Open the directory in IntelliJ or other desired Java IDE
 
