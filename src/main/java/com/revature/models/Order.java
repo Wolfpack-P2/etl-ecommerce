@@ -10,7 +10,9 @@ import java.sql.Timestamp;
 
 @Entity 
 @Table(name = "orders")
-@NoArgsConstructor @AllArgsConstructor @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 public class Order {
 
     @Id
@@ -30,6 +32,9 @@ public class Order {
     private String ecommerce_website_name;
     private Character payment_txn_success;
     private String failure_reason;
+
+    @Transient
+    private int count;
 
 }
 
