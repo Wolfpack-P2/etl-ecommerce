@@ -4,11 +4,11 @@ function $(x) {
 
 function fetchUser() {
     let header = $("dashboard-heading")
-    header.innerHTML = `Welcome, John Doe!`
+    header.innerHTML = `Dashboard`
 }
 
 
-function drawChart() {
+/* function drawChart() {
     // Define the chart to be drawn.
     var data = new google.visualization.DataTable();
     data.addColumn('string', 'Element');
@@ -26,25 +26,33 @@ function drawChart() {
     // Instantiate and draw the chart.
     var chart = new google.visualization.PieChart($('my-pie-chart'));
     chart.draw(data, options);
-  }
+  } */
 
 
-  function drawRegionsMap() {
+  async function drawRegionsMap() {
     var data = google.visualization.arrayToDataTable([
-      ['Country', 'Popularity'],
-      ['Germany', 200],
-      ['United States', 300],
-      ['Brazil', 400],
-      ['Canada', 500],
-      ['France', 600],
-      ['RU', 700]
+      ['Country', 'Category', "Sales"],
+      ['Germany', "Snitzel", 1000],
+      ['United States', "Guns", 300],
+      ['Brazil', "Coconuts", 400],
+      ['Canada', "Maple Syrup", 500],
+      ['France', "Baguets", 600],
+      ['RU', "Violence", 700]
     ]);
 
     var options = {
-        backgroundColor: '#1b232e'
+        backgroundColor: '#363c4d',
+        width: '900',
+        height: '450'
     };
 
     var chart = new google.visualization.GeoChart(document.getElementById('regions-div'));
 
     chart.draw(data, options);
   }
+
+    /* let geoTab = $("nav-geochart")
+    console.log(geoTab)
+    geoTab.click(function(){
+      $(this).tab('show');
+    }) */
