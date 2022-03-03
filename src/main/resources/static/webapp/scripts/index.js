@@ -2,10 +2,10 @@ function $(x){
     return document.getElementById(x)
 }
 
-let url = "http://localhost:8080/ETL-E-Commerce/login"
+let loginUrl = "http://localhost:8080/ETL-E-Commerce/login"
+let registerUrl = "http://localhost:8080/ETL-E-Commerce/register"
 
 
-let user = {}
 
 function showRegister() {
     let registerCard = $("register-card")
@@ -24,7 +24,7 @@ async function login() {
     "password": password
   }
 
-  const rawResponse = await fetch(url, {
+  const rawResponse = await fetch(loginUrl, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -57,10 +57,34 @@ password.onchange = validatePassword;
 confirm_password.onkeyup = validatePassword;
 
 async function register() {
+  
   let firstName = $("first-name").value
   let lastName = $("name-name").value
   let username = $("username").value
   let password = $("password").value
   
+  let user = {
+      'firstName': firstName,
+      'lastName': lastName,
+      'username': username,
+      'password': password
+  }
+
+  const rawResponse = await fetch(registerUrl, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(user)
+  });
+  
+  const content = await rawResponse.json();
+
+  if (content == 1) {
+    $('username').setCustomValidity('Username Not Available')
+  } else {
+    redirect: window.location.replace("http://localhost:8080/ETL-E-Commerce/index.html")
+  }
 }
 
