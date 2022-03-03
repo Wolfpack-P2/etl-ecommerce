@@ -3,10 +3,8 @@ package com.revature.controllers;
 import com.revature.models.User;
 import com.revature.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/users")
 @RestController
@@ -19,7 +17,12 @@ public class RegisterController {
     }
 
     @PostMapping("/register")
-    public void registerUser(@RequestBody User user) {
-        userRepo.registerUser(user.getFirstName(), user.getLastName(), user.getUsername(), user.getPassword());
+    public ResponseEntity<Integer> registerUser(@RequestBody User user) {
+        if (userRepo.findByUsername(user.getUsername()) == null) {
+            userRepo.registerUser(user.getFirstName(), user.getLastName(), user.getUsername(), user.getPassword());
+        } else {
+            return ResponseEntity.ok(0);
+        }
+        return ResponseEntity.ok(1);
     }
 }
