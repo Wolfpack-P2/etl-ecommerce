@@ -18,7 +18,7 @@ html, body{
 }
 
 #side-bar-2{
-    background-color: #1b232e;
+    background-color: #363c4d;
 }
 
 #login-card{
@@ -93,6 +93,11 @@ div.visible{
     margin-left: 50px;
 }
 
+#bar-heading{
+    color: white;
+    margin-left: 50px;
+}
+
 #region-card{
     background-color: #363c4d;
     margin-left: 50px;
@@ -104,12 +109,28 @@ div.visible{
 #nav-geochart{
     padding: 5px;
     width: 100%;
-
 }
+
+#nav-barchart{
+    padding: 5px;
+    width: 100%;
+}
+
 #regions-div{
     background-color: #363c4d;
+    margin-left: 0px;
     width: 100%;
     height: 100%;
+}
+
+#bar-div{
+    margin-left: 50px;
+}
+
+#column-div{
+    width: 100%;
+    height: 100%;
+    margin-left: 0px;
 }
 
 #my-pie-chart{
