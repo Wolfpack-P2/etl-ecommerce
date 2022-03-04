@@ -3,20 +3,19 @@ function $(x){
 }
 
 let loginUrl = "http://localhost:8080/ETL-E-Commerce/login"
-let registerUrl = "http://localhost:8080/ETL-E-Commerce/register"
+let registerUrl = "http://localhost:8080/ETL-E-Commerce/users"
 
 
 
 function showRegister() {
     let registerCard = $("register-card")
     let loginCard = $("login-card")
-    console.log(loginCard)
     loginCard.parentNode.replaceChild(registerCard, loginCard)
     registerCard.style.display = "block"
 }
 
 async function login() {
-  console.log('helloooo')
+ 
   let username = $("username").value
   let password = $("password").value
   let user = {
@@ -31,18 +30,28 @@ async function login() {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(user)
-  });
-  
-  const content = await rawResponse.json();
-
-  if (content != null) {
+  })
+  .then(resp => {
+    return resp.json()
+  })
+  .then(() => {
+    redirect: window.location.replace("http://localhost:8080/ETL-E-Commerce/dashboard.html")
+  })
+  .catch(error => {
+    alert("Invalid Credentials")
+    location.reload()
+  })
+ /*  if(content =! undefined) {
     redirect: window.location.replace("http://localhost:8080/ETL-E-Commerce/dashboard.html")
   } else {
-    alert("Invalid Credentials")
-  }
+    location.reload()
+    await alert("Invalid Credentials")
+  } */
+
+  
 }
 
-let password = $("password")
+let password = $("reg-password")
 let confirm_password = $("confirm-password")
 
 function validatePassword(){
@@ -57,34 +66,43 @@ password.onchange = validatePassword;
 confirm_password.onkeyup = validatePassword;
 
 async function register() {
-  
   let firstName = $("first-name").value
-  let lastName = $("name-name").value
-  let username = $("username").value
-  let password = $("password").value
+  let lastName = $("last-name").value
+  let username = $("reg-username").value
+  let regPassword = $("reg-password").value
   
   let user = {
       'firstName': firstName,
       'lastName': lastName,
       'username': username,
-      'password': password
+      'password': regPassword
   }
 
-  const rawResponse = await fetch(registerUrl, {
+  let response = await fetch(registerUrl, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(user)
-  });
+  })
+  .then((resp) => {
+    return resp.text()
+  })
+  .then((data) => {
+    if (data == 'success') {  
+      alert("Registration Successful, Please Log In")
+      location.reload()  
+    } else {
+      alert("Username Not Available")
+      location.reload()
+      .then(showRegister())
+    }
+  })
+  .catch(error => {
+    alert(error)
+    location.reload
+  })
   
-  const content = await rawResponse.json();
-
-  if (content == 1) {
-    $('username').setCustomValidity('Username Not Available')
-  } else {
-    redirect: window.location.replace("http://localhost:8080/ETL-E-Commerce/index.html")
-  }
 }
 
