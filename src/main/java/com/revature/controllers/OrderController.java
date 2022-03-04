@@ -1,6 +1,5 @@
 package com.revature.controllers;
 
-import com.revature.models.Order;
 import com.revature.models.QueryResult;
 import com.revature.repositories.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +22,7 @@ public class OrderController {
 
     @GetMapping("/category")
     public List<QueryResult> topCategory(){
+        System.out.println(orderRepo.findCategory());
         return orderRepo.findCategory();
     }
 

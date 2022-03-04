@@ -15,36 +15,36 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
 
     @Modifying
     @Transactional
-    @Query(value = "SELECT PRODUCT_CATEGORY, COUNT(PRODUCT_CATEGORY) FROM ETL.ORDERS GROUP BY PRODUCT_CATEGORY", nativeQuery = true)
+    @Query(value = "SELECT PRODUCT_CATEGORY, COUNT(PRODUCT_CATEGORY) FROM ETL.ORDERS GROUP BY PRODUCT_CATEGORY ORDER BY COUNT", nativeQuery = true)
     List<QueryResult> findCategory();
 
     @Modifying
     @Transactional
-    @Query(value = "SELECT PRODUCT_CATEGORY, COUNTRY, COUNT(PRODUCT_CATEGORY) FROM ETL.ORDERS GROUP BY PRODUCT_CATEGORY, COUNTRY", nativeQuery = true)
+    @Query(value = "SELECT PRODUCT_CATEGORY, COUNTRY, COUNT(PRODUCT_CATEGORY) FROM ETL.ORDERS GROUP BY PRODUCT_CATEGORY, COUNTRY ORDER BY COUNT", nativeQuery = true)
     List<QueryResult> findCategoryCountry();
 
     @Modifying
     @Transactional
-    @Query(value = "SELECT PRODUCT_CATEGORY, EXTRACT(MONTH FROM DATETIME) AS MONTH, COUNT(PRODUCT_CATEGORY) FROM ETL.ORDERS GROUP BY PRODUCT_CATEGORY, MONTH", nativeQuery = true)
+    @Query(value = "SELECT PRODUCT_CATEGORY, EXTRACT(MONTH FROM DATETIME) AS MONTH, COUNT(PRODUCT_CATEGORY) FROM ETL.ORDERS GROUP BY PRODUCT_CATEGORY, MONTH ORDER BY MONTH", nativeQuery = true)
     List<QueryResult> findYearPopularity();
 
     @Modifying
     @Transactional
-    @Query(value = "SELECT PRODUCT_CATEGORY, COUNTRY, EXTRACT(MONTH FROM DATETIME) AS MONTH, COUNT(PRODUCT_CATEGORY) FROM ETL.ORDERS GROUP BY PRODUCT_CATEGORY, COUNTRY, MONTH", nativeQuery = true)
+    @Query(value = "SELECT PRODUCT_CATEGORY, COUNTRY, EXTRACT(MONTH FROM DATETIME) AS MONTH, COUNT(PRODUCT_CATEGORY) FROM ETL.ORDERS GROUP BY PRODUCT_CATEGORY, COUNTRY, MONTH ORDER BY MONTH", nativeQuery = true)
     List<QueryResult> findYearPopularityCountry();
 
     @Modifying
     @Transactional
-    @Query(value = "SELECT COUNTRY, COUNT(COUNTRY) FROM ETL.ORDERS GROUP BY COUNTRY", nativeQuery = true)
+    @Query(value = "SELECT COUNTRY, COUNT(COUNTRY) FROM ETL.ORDERS GROUP BY COUNTRY ORDER BY COUNT", nativeQuery = true)
     List<QueryResult> findTopCountry();
 
     @Modifying
     @Transactional
-    @Query(value = "SELECT EXTRACT(HOUR FROM DATETIME) AS HOUR, COUNT(EXTRACT(HOUR FROM DATETIME)) FROM ETL.ORDERS GROUP BY HOUR", nativeQuery = true)
+    @Query(value = "SELECT EXTRACT(HOUR FROM DATETIME) AS HOUR, COUNT(EXTRACT(HOUR FROM DATETIME)) FROM ETL.ORDERS GROUP BY HOUR ORDER BY HOUR", nativeQuery = true)
     List<QueryResult> findBusiestTime();
 
     @Modifying
     @Transactional
-    @Query(value = "SELECT EXTRACT(HOUR FROM DATETIME) AS HOUR, COUNTRY, COUNT(EXTRACT(HOUR FROM DATETIME)) FROM ETL.ORDERS GROUP BY HOUR, COUNTRY", nativeQuery = true)
+    @Query(value = "SELECT EXTRACT(HOUR FROM DATETIME) AS HOUR, COUNTRY, COUNT(EXTRACT(HOUR FROM DATETIME)) FROM ETL.ORDERS GROUP BY HOUR, COUNTRY ORDER BY HOUR", nativeQuery = true)
     List<QueryResult> findBusiestTimeCountry();
 }
