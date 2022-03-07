@@ -98,6 +98,15 @@ div.visible{
     margin-left: 50px;
 }
 
+#bar-label{
+    color: white;
+    margin-left: 50px;
+}
+
+#step-div{
+    margin-left: 50px;
+}
+
 #region-card{
     background-color: #363c4d;
     margin-left: 50px;
@@ -124,6 +133,15 @@ div.visible{
 }
 
 #bar-div{
+    margin-left: 50px;
+}
+
+#geo-label{
+    color: white;
+    margin-left: 50px;
+}
+
+#geo-div{
     margin-left: 50px;
 }
 

@@ -81,7 +81,7 @@ let catUrl="http://localhost:8080/ETL-E-Commerce/order/category"
         color: '#ffffff'
       },
       backgroundColor: '#363c4d',
-      width: '900',
+      width: '1000',
       height: '450',
       hAxis: {
         textStyle: {
@@ -161,4 +161,96 @@ let catUrl="http://localhost:8080/ETL-E-Commerce/order/category"
 
     chart.draw(chartData, options);
   }
+
+  async function drawBarChart() {
+    let chartData = [
+      ['Month', 'Baby', 'Clothing', 'Electronics', 'Grocery', 'Home Essentials', 'Home Improvement', 'Patio & Garden'],
+    ['Jan'],
+    ['Feb'],
+    ['Mar'],
+    ['Apr'],
+    ['May'],
+    ['Jun'],
+    ['Jul'],
+    ['Aug'],
+    ['Sep'],
+    ['Oct'],
+    ['Nov'],
+    ['Dec']
+    ]
+    await fetch('http://localhost:8080/ETL-E-Commerce/order/year')
+    .then(resp => {
+      return resp.json()
+    })
+    .then(data => {
+      data.forEach(element => {
+       chartData[parseInt(element.month)].push(element.count)
+      })
+    })
+
+    let viz = google.visualization.arrayToDataTable(chartData)
+
+      
+
+      var options = {
+       backgroundColor: { fill: "#363c4d" },
+        width: '1050',
+        height: '500',
+        hAxis: {
+        textStyle: {
+          color: '#ffffff'
+        }
+      },
+      vAxis: {
+        textStyle: {
+          color: '#ffffff'
+        }
+      },
+      legend: {
+        textStyle: {
+          color: '#ffffff'
+        }
+      },
+      annotations: {
+        textStyle: {
+          fontSize: 10
+        }
+      }
+      };
+
+      var chart = new google.charts.Bar(document.getElementById('step-div'));
+      chart.draw(viz, google.charts.Bar.convertOptions(options));
+    }
+
+    async function drawGeoChart() {
+
+
+      let chartData = new google.visualization.DataTable();
+      chartData.addColumn('string', 'Country');
+      chartData.addColumn('number', 'Order Volume');
+        
+  
+      await fetch ('http://localhost:8080/ETL-E-Commerce/order/sales/country')
+      .then(resp => {
+        return resp.json()
+      })
+      .then(data => {
+        data.forEach(element => {
+          chartData.addRow([element.country, element.count])
+        })
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  
+      var options = {
+          backgroundColor: '#363c4d',
+          width: '1000',
+          height: '500'
+      };
+  
+      var chart = new google.visualization.GeoChart(document.getElementById('geo-div'));
+  
+      chart.draw(chartData, options);
+    }
 
