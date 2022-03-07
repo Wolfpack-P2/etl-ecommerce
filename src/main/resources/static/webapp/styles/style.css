@@ -14,11 +14,11 @@ html, body{
 }
 
 #side-bar{
-    background-color: #1b232e;
+    background-color: #363c4d;
 }
 
 #side-bar-2{
-    background-color: #1b232e;
+    background-color: #363c4d;
 }
 
 #login-card{
@@ -84,13 +84,71 @@ div.visible{
     color: gainsboro;
 }
 
-#regions-div{
-    background-color: #1b232e;
-    padding: 30px;
-    margin-left: 30px;
+.card-header{
+    color: white;
+}
+
+#chart-heading-1{
+    color: white;
+    margin-left: 50px;
+}
+
+#bar-heading{
+    color: white;
+    margin-left: 50px;
+}
+
+#bar-label{
+    color: white;
+    margin-left: 50px;
+}
+
+#step-div{
+    margin-left: 50px;
+}
+
+#region-card{
+    background-color: #363c4d;
+    margin-left: 50px;
     width: 1000px;
     height: 500px;
     box-shadow: 1px 1px 5px 3px rgba(0, 0, 0, 0.19);
+}
+
+#nav-geochart{
+    padding: 5px;
+    width: 100%;
+}
+
+#nav-barchart{
+    padding: 5px;
+    width: 100%;
+}
+
+#regions-div{
+    background-color: #363c4d;
+    margin-left: 0px;
+    width: 100%;
+    height: 100%;
+}
+
+#bar-div{
+    margin-left: 50px;
+}
+
+#geo-label{
+    color: white;
+    margin-left: 50px;
+}
+
+#geo-div{
+    margin-left: 50px;
+}
+
+#column-div{
+    width: 100%;
+    height: 100%;
+    margin-left: 0px;
 }
 
 #my-pie-chart{

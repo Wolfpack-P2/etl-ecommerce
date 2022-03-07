@@ -10,11 +10,13 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
 
+
     @Modifying
     @Transactional
     @Query(value = "INSERT INTO ETL.USERS (FIRSTNAME, LASTNAME, USERNAME, PASSWORD) values (?1, ?2, ?3, ?4)", nativeQuery = true)
     void registerUser(String firstName, String lastName, String username, String password);
 
     User findByUsername(String username);
+
 
 }
