@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Entity 
 @Table(name = "orders")
@@ -26,11 +27,11 @@ public class Order {
     private String payment_type;
     private Integer qty;
     private Double price;
-    private Timestamp datetime;
+    //private LocalDateTime datetime;
     private String country;
     private String city;
     private String ecommerce_website_name;
-    private Character payment_txn_success;
+    private String payment_txn_success; // was a character
     private String failure_reason;
 
     @Transient

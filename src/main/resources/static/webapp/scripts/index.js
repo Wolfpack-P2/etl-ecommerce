@@ -56,7 +56,7 @@ let confirm_password = $("confirm-password")
 
 function validatePassword(){
   if(password.value != confirm_password.value) {
-    confirm_password.setCustomValidity("Passwords Don't Match");
+    confirm_password.setCustomValidity("Passwords Do not Match");
   } else {
     confirm_password.setCustomValidity('');
   }
