@@ -72,17 +72,11 @@ let catUrl="http://localhost:8080/ETL-E-Commerce/order/category"
     chartData.addColumn('number', 'Order Volume');
 
     await fetch(catUrl)
-    .then((resp) => {
-      return resp.json()
+    .then((resp) => {return resp.json()})
+    .then(data => {data.forEach(element => {
+        chartData.addRow([element.product_category, element.count])});
     })
-    .then(data => {
-      data.forEach(element => {
-        chartData.addRow([element.product_category, element.count])
-      });
-    })
-    .catch(error => {
-      console.log(error)
-    })
+    .catch(error => {console.log(error)})
                       
     var chart = new google.visualization.ColumnChart(document.getElementById('column-div'));
     
