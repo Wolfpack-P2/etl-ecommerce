@@ -205,7 +205,7 @@ function getTypeChartData(){
                 data: {
                     labels: labels,
                     datasets: [{
-                        label: 'Number Of Transactions',
+                        label: 'Overall Transaction Rates',
                         data: data,
                         backgroundColor: ['rgba(0, 182, 0, .75)', 'rgba(237, 20, 0, .75)'],
                         borderColor: 'rgba(0, 0, 0, 1)',
