@@ -83,6 +83,7 @@ function getMgmtMart(){
                 let mgmtObject = response[i];
                 mgmtObjectArray.push(mgmtObject);
             }
+            console.log(mgmtObjectArray);
 
             // push all the mgmtObjectArray into the table
             for (let i = 0; i < mgmtObjectArray.length; i++) {
