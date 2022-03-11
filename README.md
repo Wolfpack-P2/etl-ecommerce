@@ -1,4 +1,4 @@
-# Alchemy-Wolfpack: E-Commerce ETL
+# 404 Slayers: E-Commerce ETL(WIP)
 
 Public Repository for Team Alchemy's Project Boards and Wiki
 
@@ -49,3 +49,17 @@ The purpose of the project is to create an ETL (Extract, Transform, Load) and we
 * Zahtae Mouzone
 * Nathan Pierce
 * Yasin Yardimoglu
+
+## Contributers 2
+
+* Christopher Crawford
+* Colleen Lynch
+* Coutney Hart
+* Daniel Gutierrez
+* Erik Thomas
+* Jacob Ramsey
+* Joshua Cho
+* Leonardo Molina
+* Michael Lee
+* Troy Cogdell
+* Twain Toussaint

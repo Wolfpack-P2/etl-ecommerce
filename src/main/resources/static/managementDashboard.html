@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/src/main/resources/static/webapp/styles/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="webapp/styles/dataTables.bootstrap5.min.css" />
+    <link rel="stylesheet" href="webapp/styles/style.css">
+    <title>Data Analytics Dashboard</title>
+  </head>
+  <body>
+
+
+    <!-- start top navigation bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container-fluid">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#sidebar"
+          aria-controls="offcanvasExample"
+        >
+          <span class="navbar-toggler-icon" data-bs-target="#sidebar"></span>
+        </button>
+        <a
+          class="navbar-brand me-auto ms-lg-0 ms-3 text-uppercase fw-bold"
+          href="#"
+          >E-Commerce Data Reports</a
+        >
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#topNavBar"
+          aria-controls="topNavBar"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="topNavBar">
+          <form class="d-flex ms-auto my-3 my-lg-0">
+            <div class="input-group">
+              <input
+                class="form-control"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+              />
+              <button class="btn btn-light text-dark" type="submit"> <!--On click submit function here-->
+                <i class="bi bi-search"></i>
+              </button>
+            </div>
+          </form>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- end top navigation bar -->
+
+
+    <!-- offcanvas -->
+
+
+    <!-- sidebar navigation -->
+    <div
+      class="offcanvas offcanvas-start sidebar-nav bg-dark"
+      tabindex="-1"
+      id="sidebar"
+    >
+      <div class="offcanvas-body p-0">
+        <nav class="navbar-dark">
+          <ul class="navbar-nav">
+            <li>
+              <div class="text-muted small fw-bold text-uppercase px-3">
+                E-Commerce
+              </div>
+            </li>
+            <li>
+              <a href="dashboard.html" class="nav-link px-3 active">
+                <span class="me-2"><i class="bi bi-person-fill"></i></span>
+                <span>Employee Dashboard</span>
+              </a>
+            </li>
+
+            <li class="my-4"><hr class="dropdown-divider bg-light" /></li>
+            <li>
+              <div class="text-muted small fw-bold text-uppercase px-3 mb-3">
+                CONNECT
+              </div>
+            </li>
+            <li>
+              <a href="dataQuality.html" class="nav-link px-3">
+                <span class="me-2"><i class="bi bi-graph-up"></i></span>
+                <span>Charts</span>
+              </a>
+            </li>
+            <li>
+              <a href="marketingDashboard.html" class="nav-link px-3">
+                <span class="me-2"><i class="bi bi-table"></i></span>
+                <span>Marketing</span>
+              </a>
+            </li>
+            <li>
+              <a href="researchDashboard.html" class="nav-link px-3">
+                <span class="me-2"><i class="bi bi-bell-fill"></i></span>
+                <span>Research</span> 
+              </a>
+            </li>
+            <li>
+              <a href="managementDashboard.html" class="nav-link px-3">
+                <span class="me-2"><i class="bi bi-gear"></i></span>
+                <span>Management</span>
+              </a>
+            </li>
+            <li>
+              <a href="index.html" class="nav-link px-3">
+                <span class="me-2"><i class="bi bi-door-closed"></i></span>
+                <span>Log Out</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+    <!--end of sideBar nav-->
+    <!-- offcanvas -->
+    <main class="mt-5 pt-3">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <h4><B>E-Commerce Dashboard</B></h4>
+          </div>
+        </div>
+      
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <div class="card h-100">
+              <div class="card-header">
+                <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
+                Failed Transactions <!--bar chart-->
+              </div>
+              <div class="card-body">
+                <canvas class="chart" width="400" height="200"></canvas>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <div class="card h-100">
+              <div class="card-header">
+                <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
+                 Most Common Payment Types <!--Line Graph CHARTjs HERE!-->
+              </div>
+              <div class="card-body">
+                <canvas class="chart" width="400" height="200"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+        <!-- Data Table  -->
+        <div class="row">
+          <div class="col-md-12 mb-3">
+            <div class="card">
+              <div class="card-header">
+                <span><i class="bi bi-table me-2"></i></span> Reports
+              </div>
+              <div class="card-body">
+                <div class="table-responsive" style="height:300px;overflow:auto;"
+                >
+<!-- 
+                courtney this is the button just add a function for the filter if you want -->
+
+
+                <button class="table-button" style="border-radius: 20px; background-color: slategrey; color: white;">  <i class="bi bi-chevron-right"></i></button>
+                  
+                
+                <table
+                    id="example"
+                    class="table table-striped data-table"
+                    style="width: 100%"
+                  >
+                    <thead>
+                      <tr>
+                        <th>Country </th>
+                        <th>Payment Type</th>
+                        <th>Payment Status</th>
+                        <th>Sales Revenue</th>
+                        <!-- <th>Payment</th>
+                        <th>Price</th>
+                        <th>City || Country </th>
+                        <th>Order Date</th> -->
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Tiger Nixon</td>
+                        <td>System Architect</td>
+                        <td>Edinburgh</td>
+                        <td>Edinburgh</td>
+                      </tr>
+                      <tr>
+                        <td>Garrett Winters</td>
+                        <td>Accountant</td>
+                        <td>Tokyo</td>
+                        <td>Edinburgh</td>
+                      
+                      </tr>
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <th>Country </th>
+                        <th>Payment Type</th>
+                        <th>Payment Status</th>
+                        <th>Sales Revenue</th>
+                        <!-- <th>Age</th>
+                        <th>Date || Time</th>
+                        <th>Client ID</th>
+                        <th>Claim ID</th> -->
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 mb-3">
+                <div class="card">
+                  <div class="card-header">
+                    <span><i class="bi bi-table me-2"></i></span> Reports
+                  </div>
+                  <div class="card-body">
+                    <div class="table-responsive" style="height:300px;overflow:auto;"
+                    >
+<!-- 
+                courtney this is the button just add a function for the filter if you want -->
+
+                    
+                <button class="table-button" style="border-radius: 20px; background-color: slategrey; color: white;">  <i class="bi bi-chevron-right"></i></button>
+                  
+                      <table
+                        id="example"
+                        class="table table-striped data-table"
+                        style="width: 100%"
+                      >
+                        <thead>
+                          <tr>
+                            <th>Country </th>
+                            <th>Top Payment Type</th>
+                            <th>Revenue</th>
+                            <th>Product Sold </th>
+                            <th>Transaction Success Rates</th>
+                            <th>Total Orders</th>
+                            <th>Most Common Failure Reason</th>
+                            <!-- <th>Most Common Failure Reason may be taken out</th> -->
+                            
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>Tiger Nixon</td>
+                            <td>System Architect</td>
+                            
+                         
+                          </tr>
+                          <tr>
+                            <td>Garrett Winters</td>
+                            <td>Accountant</td>
+                          
+                          
+                          </tr>
+                        </tbody>
+                        <tfoot>
+                          <tr>
+                            <th>Country </th>
+                            <th>Top Payment Type</th>
+                            <th>Revenue</th>
+                            <th>Product Sold </th>
+                            <th>Transaction Success Rates</th>
+                            <th>Total Orders</th>
+                            <th>Most Common Failure Reason</th>
+                            <!-- <th>Most Common Failure Reason may be taken out</th> -->
+                          </tr>
+                        </tfoot>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script src="webapp/scripts/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
+    <script src="webapp/scripts/jquery-3.5.1.js"></script>
+    <script src="webapp/scripts/jquery.dataTables.min.js"></script>
+    <script src="webapp/scripts/dataTables.bootstrap5.min.js"></script>
+    <script src="./js/script.js"></script>
+  </body>
+</html>
