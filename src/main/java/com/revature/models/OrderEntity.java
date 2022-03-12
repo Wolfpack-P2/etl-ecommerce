@@ -20,7 +20,7 @@ public class OrderEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_id")
-    private int orderId;
+    private Integer orderId;
 
     @Column(name = "product_name")
     private String productName;
@@ -32,7 +32,7 @@ public class OrderEntity {
     private Timestamp orderDate;
 
     @Column(name = "price")
-    private double price;
+    private Double price;
 
 
 

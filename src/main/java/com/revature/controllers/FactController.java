@@ -11,11 +11,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/facts")
 public class FactController {
+
     FactTableRepository factTableRepository;
+
     public FactController(FactTableRepository factTableRepository){
         this.factTableRepository=factTableRepository;
     }
-
 
     @GetMapping
     public List<FactEntity> getAllFacts(){

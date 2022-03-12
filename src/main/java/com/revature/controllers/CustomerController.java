@@ -12,10 +12,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/customers")
 public class CustomerController {
+
     private CustomerTableRepository customerTableRepository;
+
     public CustomerController(CustomerTableRepository customerTableRepository){
         this.customerTableRepository=customerTableRepository;
     }
+    
     @GetMapping
     public List<CustomerEntity> getAllCustomers(){
         System.out.println(customerTableRepository.findAll());
