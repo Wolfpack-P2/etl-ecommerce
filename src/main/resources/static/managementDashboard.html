@@ -137,7 +137,7 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-12">
-            <h4><B>E-Commerce Dashboard</B></h4>
+            <h4><B>Management Dashboard</B></h4>
           </div>
         </div>
       
@@ -149,7 +149,7 @@
                 Failed Transactions <!--bar chart-->
               </div>
               <div class="card-body">
-                <canvas class="chart" width="400" height="200"></canvas>
+                <canvas id="pieChart" width="200" height="200"></canvas>
               </div>
             </div>
           </div>
@@ -306,6 +306,8 @@
     <script src="webapp/scripts/jquery-3.5.1.js"></script>
     <script src="webapp/scripts/jquery.dataTables.min.js"></script>
     <script src="webapp/scripts/dataTables.bootstrap5.min.js"></script>
-    <script src="webapp/scripts/management.js"></script>
+    <script type="text/javascript" src="webapp/scripts/getAllFacts.js" defer></script>
+    <script type="text/javascript" src="webapp/scripts/management.js" defer></script>
+
   </body>
 </html>
