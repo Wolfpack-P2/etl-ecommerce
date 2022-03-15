@@ -20,7 +20,7 @@
 // Event Handlers for Buttons
 // ---------------------------
 //document.addEventListener("load", getFactsFactory);
-document.addEventListener("load", getMgmtMart);
+document.addEventListener("load", getMgmtMart); // load mgmt mart
 //document.getElementById("getMgmtMart").addEventListener("load", getMgmtMart);
 //document.getElementById("getByCountry").addEventListener("click", getByCountry)
 //document.getElementById("SalesByCountry").addEventListener("click", getSalesByCountry);
@@ -42,7 +42,7 @@ function getMgmtMart(){
     let mgmtMart = getFactsFactory(facts);
     console.log(mgmtMart);
 
-//    getTxnChartData();
+    getTxnChartData();
 //    getTypeChartData();
 }
 
