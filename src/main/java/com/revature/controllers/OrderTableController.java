@@ -14,10 +14,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/orders")
 public class OrderTableController {
+
     OrderTableRepository orderTableRepository;
+
     public OrderTableController(OrderTableRepository orderTableRepository){
         this.orderTableRepository=orderTableRepository;
     }
+    
     @GetMapping
     public List<OrderEntity> getAllOrders(){
         System.out.println(orderTableRepository.findAll());
