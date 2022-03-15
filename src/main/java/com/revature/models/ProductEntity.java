@@ -22,6 +22,6 @@ public class ProductEntity {
     private String productCategory;
 
     @Column(name="average_price")
-    private double averagePrice;
+    private Double averagePrice;
 
 }

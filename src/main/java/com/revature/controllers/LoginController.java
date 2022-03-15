@@ -30,7 +30,7 @@ public class LoginController {
 
 
     @PostMapping(consumes = "application/json", produces = "application/json")
-    public User response(@RequestBody User u){
+    public User login(@RequestBody User u){
         // get user from db by id, check username and password, return user
         User user = logRepo.findByUsername(u.getUsername());
         System.out.println(user);
