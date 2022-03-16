@@ -8,8 +8,8 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="product_table")
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
 public class ProductEntity {
     @Id
