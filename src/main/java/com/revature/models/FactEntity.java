@@ -37,8 +37,8 @@ public class FactEntity implements Serializable {
     private BigDecimal price;
 
     @OneToOne
-    @JoinColumn(name="payement_txn_id")
-    private PaymentEntity payementEntity;
+    @JoinColumn(name="payment_txn_id")
+    private PaymentEntity paymentEntity;
 
 
 }

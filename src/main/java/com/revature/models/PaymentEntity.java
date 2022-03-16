@@ -14,11 +14,14 @@ import javax.persistence.*;
 public class PaymentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="payement_txn_id")
+    @Column(name="payment_txn_id")
     private Integer paymentTxnId;
 
     @Column(name="failure_reason")
     private String failureReason;
+
+    @Column(name="payment_type")
+    private String paymentType;
 
     @Column(name="payment_txn_success")
     private String paymentTxnSuccess;

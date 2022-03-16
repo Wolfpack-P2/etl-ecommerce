@@ -25,7 +25,7 @@ public class OrderEntity {
     @Column(name = "product_name")
     private String productName;
 
-    @Column(name = "eccomerce_website_name")
+    @Column(name = "ecommerce_website_name")
     private String ecomWeb;
 
     @Column(name = "order_date")
