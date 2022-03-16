@@ -42,26 +42,27 @@ function getAllFacts(){
     let xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4 && xhr.status == 200) {
+                console.log(xhr.responseText)
                 let facts = JSON.parse(xhr.responseText);
-                for(i = 0; i <= facts.length; i++){
-                    factsArray.push(facts[i]);
-                }
+                factsArray=facts
+                getByCountry();
 
             }
         }
 
         xhr.open("GET", "http://localhost:8080/ETL-E-Commerce/facts", true);
         xhr.send();
-        getTxnChartData();
-        getTypeChartData();
-        getByCountry();
+       // getTxnChartData();
+       // getTypeChartData();
+        
 }
-console.log(factsArray);
+
 
 // -----------------------------------------------------
 // Table 1: Get Payment Type & Sales Revenue by Country
 // -----------------------------------------------------
 function getByCountry(){
+    console.log(factsArray);
 //     aggregate payment type
 //     aggregate quantity (total Sales)
 //     aggregate Revenue
@@ -116,9 +117,10 @@ function getByCountry(){
     let totalOrders = [];
     //let topTxnFailReason = [];
     for (let i = 0; i < mgmtObjectArray.length; i++) {
-        if (countries.indexOf(mgmtObjectArray[i].country) == -1) {
-            countries.push(mgmtObjectArray[i].country);
-
+        
+        if (countries.indexOf(mgmtObjectArray[i].customerEntity.country) == -1) {
+            countries.push(mgmtObjectArray[i].customerEntity.country);
+          
             topPaymentType.push(0);
             revenue.push(0);
             productSold.push(0);
@@ -129,14 +131,16 @@ function getByCountry(){
 
             // count the number of payment types for each country and push the top payment type to payment array
             // Stretch goal: count number of failure reasons for each country and push top failure reason to failure array
-            let paymentTypeCount = {};
+            let paymentTypeCount = [];
             // let topTxnFailReasonCount = {};
-            for(let i = 0; j < mgmtObjectArray.length; j++){
-                if (mgmtObjectArray[j].country == countries[countries.length - 1]) {
-                    if (paymentTypeCount[mgmtObjectArray[j].paymentType] == undefined) {
-                    paymentTypeCount[mgmtObjectArray[j].paymentType] = 1;
+            for(let j = 0; j < mgmtObjectArray.length; j++){
+                
+                if (mgmtObjectArray[j].customerEntity.country == countries[countries.length - 1]) {
+                    if (paymentTypeCount[mgmtObjectArray[j].paymentEntity.paymentType] == undefined) {
+                    paymentTypeCount[mgmtObjectArray[j].paymentEntity.paymentType] = 1;
                     }else {
-                    paymentTypeCount[mgmtObjectArray[j].paymentType]++;
+                        
+                    paymentTypeCount[mgmtObjectArray[j].paymentEntity.paymentType]++;
                     }// format for TopTxnFailReason
 //                    if (paymentTypeCount[mgmtObjectArray[j].paymentType] == undefined) {
 //                    paymentTypeCount[mgmtObjectArray[j].paymentType] = 1;
@@ -147,23 +151,30 @@ function getByCountry(){
             }
             let topPT = "";
             let topPaymentTypeCount = 0;
-            for (let key in topPaymentTypeCount) {
+            for (let key in paymentTypeCount) {
                 if (paymentTypeCount[key] > topPaymentTypeCount) {
+                    
                     topPT = key;
+                   
                     topPaymentTypeCount = paymentTypeCount[key];
+                    
                 }
             }
-            paymentType.push(topPT);
+            
+            topPaymentType.push(topPT);
             totalOrders.push(0);
         }
 
-        let countryIndex = countries.indexOf(mgmtObjectArray[i].country);
-        let totalProductSold = productSold.indexOf(mgmtObjectArray[i].qty);
-        let totalRevenue = revenue.indexOf(mgmtObjectArray[i].price);
-        if (mgmtObjectArray[i].txnStatus == "Y") {
+        let countryIndex = countries.indexOf(mgmtObjectArray[i].customerEntity.country);
+        console.log(countryIndex);
+        let totalProductSold = productSold.indexOf(mgmtObjectArray[i].productEntity.qty);
+        console.log(totalProductSold)
+        let totalRevenue = revenue.indexOf(mgmtObjectArray[i].orderEntity.price);
+        console.log(totalRevenue)
+        if (mgmtObjectArray[i].paymentEntity.paymentTxnSuccess == "Y") {
             txnSuccess[countryIndex]++;
-            totalProductSold = totalProductSold + mgmtObjectArray[i].qty;
-            totalRevenue = totalRevenue + mgmtObjectArray[i].price;
+            totalProductSold = totalProductSold + mgmtObjectArray[i].productEntity.qty;
+            totalRevenue = totalRevenue + mgmtObjectArray[i].productEntity.price;
 
         } else {
             txnFailed[countryIndex]++;
@@ -176,21 +187,28 @@ function getByCountry(){
         let row = document.createElement("tr");
         let country = document.createElement("td");
         country.innerHTML = countries[i];
+        
         row.appendChild(country);
         let paymentType = document.createElement("td");
         paymentType.innerHTML = topPaymentType[i];
+        
         row.appendChild(paymentType);
         let revenue = document.createElement("td");
         revenue.innerHTML = revenue[i];
+       
         row.appendChild(revenue);
         let productSold = document.createElement("td");
         productSold.innerHTML = productSold[i];
+        
         row.appendChild(productSold);
         let txnSuccess = document.createElement("td");
         txnSuccess.innerHTML = txnSuccess[i];
+        
         row.appendChild(txnSuccess);
         let totalOrders = document.createElement("td");
         totalOrders.innerHTML = totalOrders[i];
+        
+
         row.appendChild(totalOrders);
 
     }

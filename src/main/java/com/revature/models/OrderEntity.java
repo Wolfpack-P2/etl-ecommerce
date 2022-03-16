@@ -1,8 +1,6 @@
 package com.revature.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -12,7 +10,9 @@ import java.sql.Timestamp;
 @Table(name = "order_table")
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
+@ToString
 
 public class OrderEntity {
     @Id
@@ -33,7 +33,14 @@ public class OrderEntity {
     private Double price;
 
 
-
-
-
+    @Override
+    public String toString() {
+        return "OrderEntity{" +
+                "orderId=" + orderId +
+                ", productName='" + productName + '\'' +
+                ", ecomWeb='" + ecomWeb + '\'' +
+                ", orderDate=" + orderDate +
+                ", price=" + price +
+                '}';
+    }
 }

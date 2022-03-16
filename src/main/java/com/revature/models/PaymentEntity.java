@@ -26,5 +26,13 @@ public class PaymentEntity {
     @Column(name="payment_txn_success")
     private String paymentTxnSuccess;
 
-
+    @Override
+    public String toString() {
+        return "PaymentEntity{" +
+                "paymentTxnId=" + paymentTxnId +
+                ", failureReason='" + failureReason + '\'' +
+                ", paymentType='" + paymentType + '\'' +
+                ", paymentTxnSuccess='" + paymentTxnSuccess + '\'' +
+                '}';
+    }
 }

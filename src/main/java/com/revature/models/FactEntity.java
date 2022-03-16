@@ -1,8 +1,6 @@
 package com.revature.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,7 +11,6 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-
 public class FactEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,5 +36,15 @@ public class FactEntity implements Serializable {
     @JoinColumn(name="payment_txn_id")
     private PaymentEntity paymentEntity;
 
-
+    @Override
+    public String toString() {
+        return "FactEntity{" +
+                "id=" + id +
+                ", orderEntity=" + orderEntity +
+                ", customerEntity=" + customerEntity +
+                ", productEntity=" + productEntity +
+                ", price=" + price +
+                ", paymentEntity=" + paymentEntity +
+                '}';
+    }
 }
