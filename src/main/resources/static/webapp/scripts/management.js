@@ -43,10 +43,9 @@ function getAllFacts(){
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4 && xhr.status == 200) {
                 let facts = JSON.parse(xhr.responseText);
-                for(i = 0; i <= facts.length; i++){
-                    factsArray.push(facts[i]);
-                }
-
+                    factsArray = facts;
+                    console.log(factsArray);
+                    getByCountry();
             }
         }
 
@@ -54,9 +53,8 @@ function getAllFacts(){
         xhr.send();
         getTxnChartData();
         getTypeChartData();
-        getByCountry();
 }
-console.log(factsArray);
+
 
 // -----------------------------------------------------
 // Table 1: Get Payment Type & Sales Revenue by Country
@@ -100,11 +98,6 @@ function getByCountry(){
     });
     thead.appendChild(headerRow);
 
-//    let mgmtObjectArray = [];
-//    for (let i = 0; i < response.length; i++) {
-//        let mgmtObject = response[i];
-//        mgmtObjectArray.push(mgmtObject);
-//    }
     let mgmtObjectArray = factsArray;
     // Create table arrays with no duplicate countries
     let countries = [];
@@ -153,7 +146,7 @@ function getByCountry(){
                     topPaymentTypeCount = paymentTypeCount[key];
                 }
             }
-            paymentType.push(topPT);
+            /*paymentType*/topPaymentType.push(topPT);
             totalOrders.push(0);
         }
 
@@ -272,40 +265,6 @@ function getTypeChartData(){
             console.log(response)
             arr = paymentType1(response);
             console.log(arr);
-            let labels = [];
-            let data = [];
-            let paymentTypeCount = {};
-            let topPaymentType = [];
-            let paymentType = [];
-            for (let i = 0; i < response.length; i++) {
-                // if the paymentType at index i of response is not in paymentTypeCount, include that payment type and add 1
-                if (paymentTypeCount[response[i].paymentType] == undefined) {
-                paymentTypeCount[response[i].paymentType] = 1;
-                }else {
-                // if it is, just add 1 to the corresponding paymentType count
-                paymentTypeCount[response[i].paymentType]++;
-                }
-                // find the top 5? most popular payment types
-                let topPT = "";
-                let topPaymentTypeCount = 0;
-                for (let key in topPaymentTypeCount) {
-                    if (paymentTypeCount[key] > topPaymentTypeCount) {
-                        topPT = key;
-                        topPaymentTypeCount = paymentTypeCount[key];
-                    }
-                }
-                paymentType.push(topPT);
-
-//                 push labels in paymentType to labels
-//                 push data in paymentTypeCount to Data
-
-                if (labels.indexOf(paymentType[i]) == -1) {
-                    labels.push(paymentType[i].paymentType);
-                    data.push(1);
-                } else {
-                    data[labels.indexOf(paymentType[i].paymentType)]++;
-                }
-            }
 
             let ctx = document.getElementById('barChart1').getContext('2d');
             let myChart = new Chart(ctx, {
