@@ -4,11 +4,16 @@
 // I want to start loading get all facts upon signing in
 
 // export
+let factsArray = [];
 function getAllFacts(){
     let xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4 && xhr.status == 200) {
                 let facts = JSON.parse(xhr.responseText);
+                for(i = 0; i <= facts.length; i++){
+
+                }
+                // push facts into new array
  //               console.log(facts);
             }
         }
@@ -18,9 +23,9 @@ function getAllFacts(){
 
         xhr.open("GET", "http://localhost:8080/ETL-E-Commerce/facts", true);
         xhr.send();
-        return facts;
        // console.log(facts);
 }
+
 
 function getFactsFactory(facts){
     return facts;
