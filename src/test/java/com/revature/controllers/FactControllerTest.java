@@ -26,7 +26,7 @@ public class FactControllerTest {
             assert fact.getCustomerEntity() != null;
             assert fact.getProductEntity() != null;
             assert fact.getPrice() != null;
-            assert fact.getPayementEntity() != null;
+            assert fact.getPaymentEntity() != null;
         }
     }
 }
