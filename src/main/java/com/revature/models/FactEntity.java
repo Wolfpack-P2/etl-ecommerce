@@ -3,17 +3,16 @@ package com.revature.models;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Entity
-@Data
+@Table(name="fact_table1")
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="fact_table1")
+@Data
 
 public class FactEntity implements Serializable {
     @Id
@@ -37,8 +36,8 @@ public class FactEntity implements Serializable {
     private BigDecimal price;
 
     @OneToOne
-    @JoinColumn(name="payement_txn_id")
-    private PaymentEntity payementEntity;
+    @JoinColumn(name="payment_txn_id")
+    private PaymentEntity paymentEntity;
 
 
 }

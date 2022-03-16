@@ -1,20 +1,20 @@
 package com.revature.models;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Data;
 
 import javax.persistence.*;
 
 @Entity
-@Data
+@Table(name="payment_table")
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="payment_table")
+@Data
 public class PaymentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="payement_txn_id")
+    @Column(name="payment_txn_id")
     private Integer paymentTxnId;
 
     @Column(name="failure_reason")
