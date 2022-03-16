@@ -3,12 +3,9 @@ package com.revature.controllers;
 import com.revature.models.User;
 import com.revature.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @RestController
@@ -21,13 +18,6 @@ public class LoginController {
     public LoginController(UserRepository logRepo) {
         this.logRepo = logRepo;
     }
-
-
-   /* @PostMapping(consumes = "application/json", produces = "application/json")
-    public ResponseEntity<User> loginUser (@RequestBody User u){
-        return ResponseEntity.ok(logRepo.save(u));
-    }*/
-
 
     @PostMapping(consumes = "application/json", produces = "application/json")
     public User login(@RequestBody User u){
@@ -43,7 +33,6 @@ public class LoginController {
         System.out.println("Login Failed");
         return null;
     }
-
 
     @GetMapping
     public ResponseEntity<List<User>> getUsers(){

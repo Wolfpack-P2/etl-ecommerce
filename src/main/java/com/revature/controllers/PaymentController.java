@@ -1,6 +1,5 @@
 package com.revature.controllers;
 
-import com.revature.models.OrderEntity;
 import com.revature.models.PaymentEntity;
 import com.revature.repositories.PaymentTableRepository;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,17 +1,16 @@
 package com.revature.models;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
-import net.bytebuddy.dynamic.loading.InjectionClassLoader;
+import lombok.Data;
 
 import javax.persistence.*;
 
 @Entity
-@Data
+@Table(name="product_table")
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="product_table")
+@Data
 public class ProductEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

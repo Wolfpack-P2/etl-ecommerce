@@ -3,13 +3,11 @@ package com.revature.models;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 
 import java.sql.Timestamp;
-@Component
+
 @Entity
 @Table(name = "order_table")
 @NoArgsConstructor
@@ -25,7 +23,7 @@ public class OrderEntity {
     @Column(name = "product_name")
     private String productName;
 
-    @Column(name = "eccomerce_website_name")
+    @Column(name = "ecommerce_website_name")
     private String ecomWeb;
 
     @Column(name = "order_date")
