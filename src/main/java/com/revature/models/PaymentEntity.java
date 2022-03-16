@@ -20,6 +20,9 @@ public class PaymentEntity {
     @Column(name="failure_reason")
     private String failureReason;
 
+    @Column(name="payment_type")
+    private String paymentType;
+
     @Column(name="payment_txn_success")
     private String paymentTxnSuccess;
 
