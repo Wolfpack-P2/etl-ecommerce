@@ -23,6 +23,7 @@ public class PaymentControllerTest {
         for (PaymentEntity payment : payments) {
             assert payment.getPaymentTxnId() != null;
             assert payment.getFailureReason() != null;
+            assert payment.getPaymentType() != null;
             assert payment.getPaymentTxnSuccess() != null;
         }
     }
