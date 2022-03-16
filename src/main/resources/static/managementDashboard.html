@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="webapp/styles/style.css">
     <title>Data Analytics Dashboard</title>
   </head>
-  <body>
+  <body onload = "getAllFacts()">
 
 
     <!-- start top navigation bar -->
@@ -137,7 +137,7 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-12">
-            <h4><B>E-Commerce Dashboard</B></h4>
+            <h4><B>Management Dashboard</B></h4>
           </div>
         </div>
       
@@ -146,10 +146,10 @@
             <div class="card h-100">
               <div class="card-header">
                 <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
-                Failed Transactions <!--bar chart-->
+                Overall Transaction Statistics <!--bar chart-->
               </div>
               <div class="card-body">
-                <canvas class="chart" width="400" height="200"></canvas>
+                <canvas id="pieChart1" width="200" height="200"></canvas>
               </div>
             </div>
           </div>
@@ -157,10 +157,10 @@
             <div class="card h-100">
               <div class="card-header">
                 <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
-                 Most Common Payment Types <!--Line Graph CHARTjs HERE!-->
+                 Most Common Payment Types
               </div>
               <div class="card-body">
-                <canvas class="chart" width="400" height="200"></canvas>
+                <canvas id="barChart1" class="chart" width="200" height="200"></canvas>
               </div>
             </div>
           </div>
@@ -170,70 +170,57 @@
 
 
         <!-- Data Table  -->
-        <div class="row">
-          <div class="col-md-12 mb-3">
-            <div class="card">
-              <div class="card-header">
-                <span><i class="bi bi-table me-2"></i></span> Reports
-              </div>
-              <div class="card-body">
-                <div class="table-responsive" style="height:300px;overflow:auto;"
-                >
-<!-- 
-                courtney this is the button just add a function for the filter if you want -->
+<!--        <div class="row">-->
+<!--          <div class="col-md-12 mb-3">-->
+<!--            <div class="card">-->
+<!--              <div class="card-header">-->
+<!--                <span><i class="bi bi-table me-2"></i></span> Reports-->
+<!--              </div>-->
+<!--              <div class="card-body">-->
+<!--                <div class="table-responsive" style="height:300px;overflow:auto;">-->
+<!--                  -->
+<!--                <button class="table-button" style="border-radius: 20px; background-color: slategrey; color: white;">  <i class="bi bi-chevron-right"></i></button>-->
+<!--                  -->
+<!--                <table-->
+<!--                    id="example"-->
+<!--                    class="table table-striped data-table"-->
+<!--                    style="width: 100%">-->
+<!--                    <thead>-->
+<!--                      <tr>-->
+<!--                        <th>Country </th>-->
+<!--                        <th>Payment Type</th>-->
+<!--                        <th>Payment Status</th>-->
+<!--                        <th>Sales Revenue</th>-->
 
-
-                <button class="table-button" style="border-radius: 20px; background-color: slategrey; color: white;">  <i class="bi bi-chevron-right"></i></button>
-                  
-                
-                <table
-                    id="example"
-                    class="table table-striped data-table"
-                    style="width: 100%"
-                  >
-                    <thead>
-                      <tr>
-                        <th>Country </th>
-                        <th>Payment Type</th>
-                        <th>Payment Status</th>
-                        <th>Sales Revenue</th>
-                        <!-- <th>Payment</th>
-                        <th>Price</th>
-                        <th>City || Country </th>
-                        <th>Order Date</th> -->
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Tiger Nixon</td>
-                        <td>System Architect</td>
-                        <td>Edinburgh</td>
-                        <td>Edinburgh</td>
-                      </tr>
-                      <tr>
-                        <td>Garrett Winters</td>
-                        <td>Accountant</td>
-                        <td>Tokyo</td>
-                        <td>Edinburgh</td>
-                      
-                      </tr>
-                    </tbody>
-                    <tfoot>
-                      <tr>
-                        <th>Country </th>
-                        <th>Payment Type</th>
-                        <th>Payment Status</th>
-                        <th>Sales Revenue</th>
-                        <!-- <th>Age</th>
-                        <th>Date || Time</th>
-                        <th>Client ID</th>
-                        <th>Claim ID</th> -->
-                      </tr>
-                    </tfoot>
-                  </table>
-                </div>
-              </div>
-            </div>
+<!--                      </tr>-->
+<!--                    </thead>-->
+<!--                    <tbody>-->
+<!--                      <tr>-->
+<!--                        <td>Tiger Nixon</td>-->
+<!--                        <td>System Architect</td>-->
+<!--                        <td>Edinburgh</td>-->
+<!--                        <td>Edinburgh</td>-->
+<!--                      </tr>-->
+<!--                      <tr>-->
+<!--                        <td>Garrett Winters</td>-->
+<!--                        <td>Accountant</td>-->
+<!--                        <td>Tokyo</td>-->
+<!--                        <td>Edinburgh</td>-->
+<!--                      -->
+<!--                      </tr>-->
+<!--                    </tbody>-->
+<!--                    <tfoot>-->
+<!--                      <tr>-->
+<!--                        <th>Country </th>-->
+<!--                        <th>Payment Type</th>-->
+<!--                        <th>Payment Status</th>-->
+<!--                        <th>Sales Revenue</th>-->
+<!--                      </tr>-->
+<!--                    </tfoot>-->
+<!--                  </table>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
             <div class="row">
               <div class="col-md-12 mb-3">
                 <div class="card">
@@ -247,53 +234,12 @@
                 courtney this is the button just add a function for the filter if you want -->
 
                     
-                <button class="table-button" style="border-radius: 20px; background-color: slategrey; color: white;">  <i class="bi bi-chevron-right"></i></button>
-                  
-                      <table
-                        id="example"
-                        class="table table-striped data-table"
-                        style="width: 100%"
-                      >
-                        <thead>
-                          <tr>
-                            <th>Country </th>
-                            <th>Top Payment Type</th>
-                            <th>Revenue</th>
-                            <th>Product Sold </th>
-                            <th>Transaction Success Rates</th>
-                            <th>Total Orders</th>
-                            <th>Most Common Failure Reason</th>
-                            <!-- <th>Most Common Failure Reason may be taken out</th> -->
-                            
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>Tiger Nixon</td>
-                            <td>System Architect</td>
-                            
-                         
-                          </tr>
-                          <tr>
-                            <td>Garrett Winters</td>
-                            <td>Accountant</td>
-                          
-                          
-                          </tr>
-                        </tbody>
-                        <tfoot>
-                          <tr>
-                            <th>Country </th>
-                            <th>Top Payment Type</th>
-                            <th>Revenue</th>
-                            <th>Product Sold </th>
-                            <th>Transaction Success Rates</th>
-                            <th>Total Orders</th>
-                            <th>Most Common Failure Reason</th>
-                            <!-- <th>Most Common Failure Reason may be taken out</th> -->
-                          </tr>
-                        </tfoot>
-                      </table>
+<!--                <button class="table-button" style="border-radius: 20px; background-color: slategrey; color: white;">  <i class="bi bi-chevron-right"></i></button>-->
+                      <div class="card-body">
+                        <div id="mgmtDiv" class="table-responsive" style="height:500px;overflow:auto;">
+                      <table id="mgmtStatsTable" class="table table-striped data-table" style="width: 100%"></table>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -306,6 +252,7 @@
     <script src="webapp/scripts/jquery-3.5.1.js"></script>
     <script src="webapp/scripts/jquery.dataTables.min.js"></script>
     <script src="webapp/scripts/dataTables.bootstrap5.min.js"></script>
-    <script src="webapp/scripts/management.js"></script>
+    <script type="text/javascript" src="webapp/scripts/management.js" defer></script>
+
   </body>
 </html>
