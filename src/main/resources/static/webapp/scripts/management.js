@@ -269,6 +269,9 @@ function getTypeChartData(){
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 4 && xhr.status == 200) {
             let response = JSON.parse(xhr.responseText);
+            console.log(response)
+            arr = paymentType1(response);
+            console.log(arr);
             let labels = [];
             let data = [];
             let paymentTypeCount = {};
@@ -308,10 +311,10 @@ function getTypeChartData(){
             let myChart = new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: labels,
+                    labels: arr[0],
                     datasets: [{
                         label: 'Payment Types',
-                        data: data,
+                        data: arr[1],
                         backgroundColor: ['rgba(0, 182, 0, .75)', 'rgba(237, 20, 0, .75)'],
                         borderColor: 'rgba(0, 0, 0, 1)',
                         borderWidth: 1
@@ -332,6 +335,52 @@ function getTypeChartData(){
     }
     xhr.open("GET", "http://localhost:8080/ETL-E-Commerce/payments", true);
     xhr.send();
+
+}
+
+function paymentType1(data){
+    labelArr=[]
+    barHeightArr=[]
+    centralArray=[]
+    packagedArray=[]
+    theMap=new Map();
+    for( i=0;i<data.length;i++){
+        theMap.set(data[i]['paymentType'],0)
+
+    }
+    console.log(theMap)
+    for( i=0;i<data.length;i++){
+       
+        theMap.set(data[i]['paymentType'],theMap.get(data[i]['paymentType'])+1)
+        
+
+    }
+    const iterator1 = theMap.entries();
+
+    for(const val of iterator1){
+        arr1=[]
+        arr1.push(val[0])
+        arr1.push(val[1])
+        centralArray.push(arr1)
+
+    }
+    newarr=centralArray.sort(function compare(a,b){
+        if(a[1]>b[1]){
+            return 1
+        }else if(a[1]<b[1]){
+            return -1
+        }else{
+            return 0
+        }
+
+    })
+    for(i=0;i<newarr.length;i++){
+        labelArr.push(newarr[i][0])
+        barHeightArr.push(newarr[i][1])
+    }
+    packagedArray.push(labelArr)
+    packagedArray.push(barHeightArr)
+    return packagedArray;
 
 }
 

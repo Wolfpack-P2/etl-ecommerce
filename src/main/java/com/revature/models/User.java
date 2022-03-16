@@ -1,8 +1,6 @@
 package com.revature.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -10,7 +8,9 @@ import javax.persistence.*;
 @Table(name = "users")
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@ToString
+@Getter
+@Setter
 public class User {
 
     @Id

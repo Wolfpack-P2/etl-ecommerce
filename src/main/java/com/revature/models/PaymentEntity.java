@@ -1,16 +1,16 @@
 package com.revature.models;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name="payment_table")
-@AllArgsConstructor
 @NoArgsConstructor
-@Data
+@AllArgsConstructor
+@Getter
+@Setter
+@ToString
 public class PaymentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
