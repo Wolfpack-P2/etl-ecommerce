@@ -5,8 +5,6 @@ function $(x){
 let loginUrl = "http://localhost:8080/ETL-E-Commerce/login"
 let registerUrl = "http://localhost:8080/ETL-E-Commerce/users"
 
-
-
 function showRegister() {
     let registerCard = $("register-card")
     let loginCard = $("login-card")
@@ -47,7 +45,7 @@ async function login() {
     location.reload()
     await alert("Invalid Credentials")
   } */
-
+  //  getAllFacts();
   
 }
 
@@ -103,6 +101,6 @@ async function register() {
     alert(error)
     location.reload
   })
-  
+
 }
 
