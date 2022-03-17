@@ -10,7 +10,9 @@ import java.math.BigDecimal;
 @Table(name="fact_table1")
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@ToString
+@Getter
+@Setter
 public class FactEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

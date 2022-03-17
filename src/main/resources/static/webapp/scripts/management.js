@@ -166,11 +166,11 @@ function getByCountry(){
         }
 
         let countryIndex = countries.indexOf(mgmtObjectArray[i].customerEntity.country);
-        console.log(countryIndex);
-        let totalProductSold = productSold.indexOf(mgmtObjectArray[i].productEntity.qty);
-        console.log(totalProductSold)
-        let totalRevenue = revenue.indexOf(mgmtObjectArray[i].orderEntity.price);
-        console.log(totalRevenue)
+        
+        let totalProductSold = productSold.indexOf(mgmtObjectArray[i].customerEntity.country);
+      
+        let totalRevenue = revenue.indexOf(mgmtObjectArray[i].customerEntity.country);
+      
         if (mgmtObjectArray[i].paymentEntity.paymentTxnSuccess == "Y") {
             txnSuccess[countryIndex]++;
             totalProductSold = totalProductSold + mgmtObjectArray[i].productEntity.qty;
@@ -403,7 +403,12 @@ function paymentType1(data){
 }
 
 
-
+function createTable(data){
+    map=new Map();
+    for(i=0; i<data.length;i++){
+        map.set(data[i].customerEntity.country,)
+    }
+}
 
 
 

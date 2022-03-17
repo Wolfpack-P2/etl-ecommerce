@@ -1,16 +1,17 @@
 package com.revature.models;
 
 import lombok.*;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
-
+@Component
 @Entity
 @Table(name="payment_table")
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @Getter
 @Setter
-@ToString
 public class PaymentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

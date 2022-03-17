@@ -32,6 +32,8 @@ public class OrderEntity {
     @Column(name = "price")
     private Double price;
 
+    @Column(name="qty")
+    private int qty;
 
     @Override
     public String toString() {
@@ -41,6 +43,7 @@ public class OrderEntity {
                 ", ecomWeb='" + ecomWeb + '\'' +
                 ", orderDate=" + orderDate +
                 ", price=" + price +
+                ", qty=" + qty +
                 '}';
     }
 }
