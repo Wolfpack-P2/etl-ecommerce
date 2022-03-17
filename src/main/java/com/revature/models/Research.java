@@ -2,6 +2,7 @@ package com.revature.models;
 
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 import javax.persistence.*;
@@ -29,8 +30,8 @@ public class Research {
     private String country;
     
     @Column(name = "total_price")
-    private Double totalPrice;
+    private BigDecimal totalPrice;
 
     @Column(name = "day_of_week")
-    private Integer dayOfWeek;
+    private Double dayOfWeek;
 }

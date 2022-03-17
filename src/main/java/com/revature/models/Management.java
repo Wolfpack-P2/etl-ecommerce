@@ -2,6 +2,8 @@ package com.revature.models;
 
 import lombok.*;
 
+import java.math.BigDecimal;
+
 import javax.persistence.*;
 
 @Entity
@@ -22,7 +24,7 @@ public class Management {
     private String country;
 
     @Column(name = "potential_revenue")
-    private Double potentialRevenue;
+    private BigDecimal potentialRevenue;
 
     @Column(name = "payment_txn_success")
     private String paymentTxnSuccess;
