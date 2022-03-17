@@ -26,6 +26,7 @@ public class OrderTableControllerTest {
             assert order.getEcomWeb() != null;
             assert order.getOrderDate() != null;
             assert order.getPrice() != null;
+            assert order.getQty() != null;
         }
     }
 }
