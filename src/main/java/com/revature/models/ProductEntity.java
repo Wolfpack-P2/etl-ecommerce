@@ -1,8 +1,6 @@
 package com.revature.models;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -11,6 +9,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+
 public class ProductEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,4 +22,12 @@ public class ProductEntity {
     @Column(name="average_price")
     private Double averagePrice;
 
+    @Override
+    public String toString() {
+        return "ProductEntity{" +
+                "productName='" + productName + '\'' +
+                ", productCategory='" + productCategory + '\'' +
+                ", averagePrice=" + averagePrice +
+                '}';
+    }
 }

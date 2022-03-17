@@ -1,8 +1,6 @@
 package com.revature.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -13,7 +11,6 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-
 public class OrderEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,8 +29,18 @@ public class OrderEntity {
     @Column(name = "price")
     private Double price;
 
+    @Column(name="qty")
+    private int qty;
 
-
-
-
+    @Override
+    public String toString() {
+        return "OrderEntity{" +
+                "orderId=" + orderId +
+                ", productName='" + productName + '\'' +
+                ", ecomWeb='" + ecomWeb + '\'' +
+                ", orderDate=" + orderDate +
+                ", price=" + price +
+                ", qty=" + qty +
+                '}';
+    }
 }

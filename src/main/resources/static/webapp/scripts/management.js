@@ -47,30 +47,29 @@ function getAllFacts(){
         xhr.onreadystatechange = function () {
             console.log("-----------Begin-----------------")
             if (xhr.readyState == 4 && xhr.status == 200) {
-//                console.log("-----------StartFetch-----------------")
                 let response = JSON.parse(xhr.responseText);
                 console.log(response);
-                for(let i = 0; i < response.length; i++){
-                    factsArray.push(response[i]);
-                }
+//                 for(let i = 0; i < response.length; i++){
+//                     factsArray.push(response[i]);
+//                 }
+                factsArray = response;
                 console.log(factsArray);
-                getFactsFactory(factsArray);
+                getByCountry();
             }
         }
 
         xhr.open("GET", "http://localhost:8080/ETL-E-Commerce/facts", true);
         xhr.send();
-        getTxnChartData();
-        getTypeChartData();
-        getByCountry();
+       getTxnChartData();
+       getTypeChartData();
+        
 }
-
-
 
 // -----------------------------------------------------
 // Table 1: Get Payment Type & Sales Revenue by Country
 // -----------------------------------------------------
 function getByCountry(){
+    mainMap=createTable(factsArray);
 //     aggregate payment type
 //     aggregate quantity (total Sales)
 //     aggregate Revenue
@@ -108,6 +107,7 @@ function getByCountry(){
         headerRow.appendChild(th);
     });
     thead.appendChild(headerRow);
+
 
     let mgmtObjectArray = factsArray;
     // Create table arrays with no duplicate countries
@@ -174,34 +174,44 @@ function getByCountry(){
         }
         totalOrders[countryIndex]++;
 
-    }
+    
     // Create table body
-    for (let i = 0; i < countries.length; i++) {
+    for (let key of mainMap.keys()) {
+        for(let key1 of mainMap.get(key).keys()){
         let row = document.createElement("tr");
         let country = document.createElement("td");
-        country.innerHTML = countries[i];
+        country.innerHTML = key;
+        
         row.appendChild(country);
         let paymentType = document.createElement("td");
-        paymentType.innerHTML = topPaymentType[i];
+        paymentType.innerHTML = mainMap.get(key).get(key1).get("TopPaymentType");
+        
         row.appendChild(paymentType);
         let revenue = document.createElement("td");
-        revenue.innerHTML = revenue[i];
+        revenue.innerHTML = mainMap.get(key).get(key1).get("Revenue");
+       
         row.appendChild(revenue);
         let productSold = document.createElement("td");
-        productSold.innerHTML = productSold[i];
+        productSold.innerHTML = key1
+        
         row.appendChild(productSold);
         let txnSuccess = document.createElement("td");
-        txnSuccess.innerHTML = txnSuccess[i];
+        txnSuccess.innerHTML = ((mainMap.get(key).get(key1).get("TransSuc")/(mainMap.get(key).get(key1).get("TransSuc")+mainMap.get(key).get(key1).get("TransFail")))*100);
+        
         row.appendChild(txnSuccess);
         let totalOrders = document.createElement("td");
-        totalOrders.innerHTML = totalOrders[i];
+        totalOrders.innerHTML = mainMap.get(key).get(key1).get("TotalOrder");
+        
+
         row.appendChild(totalOrders);
+        table.append(row);
 
     }
+    
 //    sorttable.makeSortable(table);
 
 }
-
+}
 
 
 // -------------------------------------------
@@ -355,11 +365,80 @@ function paymentType1(data){
 }
 
 
+function createTable(data){
+    map=new Map();
+    innerMap0=new Map();
+    innerMap1=new Map();
+    innerMap2=new Map();
+    startVal=0;
+    topPymntTyp=''
+    for(i=0; i<data.length;i++){
+        if(map.get(data[i].customerEntity.country)==undefined){
+        map.set(data[i].customerEntity.country,new Map())}
+        
+        if(map.get(data[i].customerEntity.country).get(data[i].productEntity.productName)==undefined){
+        map.get(data[i].customerEntity.country).set(data[i].productEntity.productName,new Map())}
+
+        map.get(data[i].customerEntity.country).get(data[i].productEntity.productName).set('Revenue',0)
+        map.get(data[i].customerEntity.country).get(data[i].productEntity.productName).set('TransSuc',0)
+        map.get(data[i].customerEntity.country).get(data[i].productEntity.productName).set('TransFail',0)
+        map.get(data[i].customerEntity.country).get(data[i].productEntity.productName).set('TotalOrder',0)
+        
+        if(map.get(data[i].customerEntity.country).get(data[i].productEntity.productName).get('PaymentTypetotal')==undefined){
+            
+        map.get(data[i].customerEntity.country).get(data[i].productEntity.productName).set('PaymentTypetotal',new Map())}
+       
+        map.get(data[i].customerEntity.country).get(data[i].productEntity.productName).get('PaymentTypetotal').set(data[i].paymentEntity.paymentType,0)
+        
+    }
+    for(i=0; i<data.length;i++){
+        
+        console.log(map)
+        console.log(data[i].customerEntity.country)
+       
+        map.get(data[i].customerEntity.country).get(data[i].productEntity.productName).set('Revenue',
+        map.get(data[i].customerEntity.country).get(data[i].productEntity.productName).get('Revenue')+
+        data[i].orderEntity.price*data[i].orderEntity.qty)
 
 
 
+        if(data[i].paymentEntity.paymentTxnSuccess=='Y'){
+            map.get(data[i].customerEntity.country).get(data[i].productEntity.productName).set('TransSuc',
+            map.get(data[i].customerEntity.country).get(data[i].productEntity.productName).get('TransSuc')+1) 
+        }else{
+            map.get(data[i].customerEntity.country).get(data[i].productEntity.productName).set('TransFail',
+            map.get(data[i].customerEntity.country).get(data[i].productEntity.productName).get('TransFail')+1) 
+        }
+
+        
+        map.get(data[i].customerEntity.country).get(data[i].productEntity.productName).set('TotalOrder',
+        map.get(data[i].customerEntity.country).get(data[i].productEntity.productName).get('TotalOrder')+data[i].orderEntity.qty)
+
+        map.get(data[i].customerEntity.country).get(data[i].productEntity.productName).get('PaymentTypetotal').set(data[i].paymentEntity.paymentType,
+            map.get(data[i].customerEntity.country).get(data[i].productEntity.productName).get('PaymentTypetotal').get(data[i].paymentEntity.paymentType)+1)
+        
+    }
+    for(i=0;i<data.length;i++){
+        for(let key of map.get(data[i].customerEntity.country).get(data[i].productEntity.productName).get('PaymentTypetotal').keys()){
+            if(map.get(data[i].customerEntity.country).get(data[i].productEntity.productName).get('PaymentTypetotal').get(key)>startVal){
+                topPaymentType=key
+                startVal=map.get(data[i].customerEntity.country).get(data[i].productEntity.productName).get('PaymentTypetotal').get(key)
+            }
 
 
+        }
+        map.get(data[i].customerEntity.country).get(data[i].productEntity.productName).set('TopPaymentType',topPaymentType)
+        topPaymentType=''
+        startVal=0
+
+  
+    
+}
+
+return map;
+
+
+}
 
 
 

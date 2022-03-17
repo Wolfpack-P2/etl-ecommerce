@@ -1,16 +1,15 @@
 package com.revature.models;
 
 import lombok.*;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
-
+@Component
 @Entity
 @Table(name="payment_table")
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
-@ToString
+@Data
 public class PaymentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,5 +25,13 @@ public class PaymentEntity {
     @Column(name="payment_txn_success")
     private String paymentTxnSuccess;
 
-
+    @Override
+    public String toString() {
+        return "PaymentEntity{" +
+                "paymentTxnId=" + paymentTxnId +
+                ", failureReason='" + failureReason + '\'' +
+                ", paymentType='" + paymentType + '\'' +
+                ", paymentTxnSuccess='" + paymentTxnSuccess + '\'' +
+                '}';
+    }
 }
