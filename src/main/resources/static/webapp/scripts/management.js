@@ -37,26 +37,33 @@
 // -------------------------------
 // Get All Facts
 // -------------------------------
+
+$(document).ready(function () {
+    getAllFacts();
+});
 let factsArray = [];
 function getAllFacts(){
     let xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function () {
+            console.log("-----------Begin-----------------")
             if (xhr.readyState == 4 && xhr.status == 200) {
-                
-                let facts = JSON.parse(xhr.responseText);
-                factsArray=facts
+                let response = JSON.parse(xhr.responseText);
+                console.log(response);
+//                 for(let i = 0; i < response.length; i++){
+//                     factsArray.push(response[i]);
+//                 }
+                factsArray = response;
+                console.log(factsArray);
                 getByCountry();
-
             }
         }
 
         xhr.open("GET", "http://localhost:8080/ETL-E-Commerce/facts", true);
         xhr.send();
-       // getTxnChartData();
-       // getTypeChartData();
+       getTxnChartData();
+       getTypeChartData();
         
 }
-
 
 // -----------------------------------------------------
 // Table 1: Get Payment Type & Sales Revenue by Country
@@ -101,12 +108,71 @@ function getByCountry(){
     });
     thead.appendChild(headerRow);
 
-//    let mgmtObjectArray = [];
-//    for (let i = 0; i < response.length; i++) {
-//        let mgmtObject = response[i];
-//        mgmtObjectArray.push(mgmtObject);
-//    }
-    
+
+    let mgmtObjectArray = factsArray;
+    // Create table arrays with no duplicate countries
+    let countries = [];
+    let topPaymentType = [];
+    let revenue = [];
+    let productSold = [];
+    let txnSuccess = [];
+    let txnFailed = [];
+    let totalOrders = [];
+    //let topTxnFailReason = [];
+    for (let i = 0; i < mgmtObjectArray.length; i++) {
+        if (countries.indexOf(mgmtObjectArray[i].country) == -1) {
+            countries.push(mgmtObjectArray[i].country);
+
+            topPaymentType.push(0);
+            revenue.push(0);
+            productSold.push(0);
+            txnSuccess.push(0);
+            txnFailed.push(0);
+            totalOrders.push(0);
+           // topTxnFailReason.push(0);
+
+            // count the number of payment types for each country and push the top payment type to payment array
+            // Stretch goal: count number of failure reasons for each country and push top failure reason to failure array
+            let paymentTypeCount = {};
+            // let topTxnFailReasonCount = {};
+            for(let i = 0; j < mgmtObjectArray.length; j++){
+                if (mgmtObjectArray[j].country == countries[countries.length - 1]) {
+                    if (paymentTypeCount[mgmtObjectArray[j].paymentType] == undefined) {
+                    paymentTypeCount[mgmtObjectArray[j].paymentType] = 1;
+                    }else {
+                    paymentTypeCount[mgmtObjectArray[j].paymentType]++;
+                    }// format for TopTxnFailReason
+//                    if (paymentTypeCount[mgmtObjectArray[j].paymentType] == undefined) {
+//                    paymentTypeCount[mgmtObjectArray[j].paymentType] = 1;
+//                    }else {
+//                    paymentTypeCount[mgmtObjectArray[j].paymentType]++;
+//                    }
+                }
+            }
+            let topPT = "";
+            let topPaymentTypeCount = 0;
+            for (let key in topPaymentTypeCount) {
+                if (paymentTypeCount[key] > topPaymentTypeCount) {
+                    topPT = key;
+                    topPaymentTypeCount = paymentTypeCount[key];
+                }
+            }
+            /*paymentType*/topPaymentType.push(topPT);
+            totalOrders.push(0);
+        }
+
+        let countryIndex = countries.indexOf(mgmtObjectArray[i].country);
+        let totalProductSold = productSold.indexOf(mgmtObjectArray[i].qty);
+        let totalRevenue = revenue.indexOf(mgmtObjectArray[i].price);
+        if (mgmtObjectArray[i].txnStatus == "Y") {
+            txnSuccess[countryIndex]++;
+            totalProductSold = totalProductSold + mgmtObjectArray[i].qty;
+            totalRevenue = totalRevenue + mgmtObjectArray[i].price;
+
+        } else {
+            txnFailed[countryIndex]++;
+        }
+        totalOrders[countryIndex]++;
 
     
     // Create table body
@@ -220,40 +286,6 @@ function getTypeChartData(){
             console.log(response)
             arr = paymentType1(response);
             console.log(arr);
-            let labels = [];
-            let data = [];
-            let paymentTypeCount = {};
-            let topPaymentType = [];
-            let paymentType = [];
-            for (let i = 0; i < response.length; i++) {
-                // if the paymentType at index i of response is not in paymentTypeCount, include that payment type and add 1
-                if (paymentTypeCount[response[i].paymentType] == undefined) {
-                paymentTypeCount[response[i].paymentType] = 1;
-                }else {
-                // if it is, just add 1 to the corresponding paymentType count
-                paymentTypeCount[response[i].paymentType]++;
-                }
-                // find the top 5? most popular payment types
-                let topPT = "";
-                let topPaymentTypeCount = 0;
-                for (let key in topPaymentTypeCount) {
-                    if (paymentTypeCount[key] > topPaymentTypeCount) {
-                        topPT = key;
-                        topPaymentTypeCount = paymentTypeCount[key];
-                    }
-                }
-                paymentType.push(topPT);
-
-//                 push labels in paymentType to labels
-//                 push data in paymentTypeCount to Data
-
-                if (labels.indexOf(paymentType[i]) == -1) {
-                    labels.push(paymentType[i].paymentType);
-                    data.push(1);
-                } else {
-                    data[labels.indexOf(paymentType[i].paymentType)]++;
-                }
-            }
 
             let ctx = document.getElementById('barChart1').getContext('2d');
             let myChart = new Chart(ctx, {
