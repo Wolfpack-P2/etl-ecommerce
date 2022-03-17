@@ -37,17 +37,24 @@
 // -------------------------------
 // Get All Facts
 // -------------------------------
+
+$(document).ready(function () {
+    getAllFacts();
+});
 let factsArray = [];
 function getAllFacts(){
     let xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function () {
+            console.log("-----------Begin-----------------")
             if (xhr.readyState == 4 && xhr.status == 200) {
-                let facts = JSON.parse(xhr.responseText);
-                for(int i = 0; i < facts.length; i++){
-                    factsArray.push(facts[i]);
-                    getByCountry();
+//                console.log("-----------StartFetch-----------------")
+                let response = JSON.parse(xhr.responseText);
+                console.log(response);
+                for(let i = 0; i < response.length; i++){
+                    factsArray.push(response[i]);
                 }
                 console.log(factsArray);
+                getFactsFactory(factsArray);
             }
         }
 
@@ -55,7 +62,9 @@ function getAllFacts(){
         xhr.send();
         getTxnChartData();
         getTypeChartData();
+        getByCountry();
 }
+
 
 
 // -----------------------------------------------------
