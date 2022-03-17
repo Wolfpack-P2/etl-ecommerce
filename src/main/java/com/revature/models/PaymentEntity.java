@@ -9,9 +9,7 @@ import javax.persistence.*;
 @Table(name="payment_table")
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-@Getter
-@Setter
+@Data
 public class PaymentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

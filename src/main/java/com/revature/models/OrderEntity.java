@@ -10,10 +10,7 @@ import java.sql.Timestamp;
 @Table(name = "order_table")
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
-@ToString
-
+@Data
 public class OrderEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
