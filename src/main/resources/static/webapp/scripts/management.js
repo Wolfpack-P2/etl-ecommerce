@@ -112,68 +112,7 @@ function getByCountry(){
 
     let mgmtObjectArray = factsArray;
     // Create table arrays with no duplicate countries
-    let countries = [];
-    let topPaymentType = [];
-    let revenue = [];
-    let productSold = [];
-    let txnSuccess = [];
-    let txnFailed = [];
-    let totalOrders = [];
-    //let topTxnFailReason = [];
-    for (let i = 0; i < mgmtObjectArray.length; i++) {
-        if (countries.indexOf(mgmtObjectArray[i].country) == -1) {
-            countries.push(mgmtObjectArray[i].country);
-
-            topPaymentType.push(0);
-            revenue.push(0);
-            productSold.push(0);
-            txnSuccess.push(0);
-            txnFailed.push(0);
-            totalOrders.push(0);
-           // topTxnFailReason.push(0);
-
-            // count the number of payment types for each country and push the top payment type to payment array
-            // Stretch goal: count number of failure reasons for each country and push top failure reason to failure array
-            let paymentTypeCount = {};
-            // let topTxnFailReasonCount = {};
-            for(let i = 0; j < mgmtObjectArray.length; j++){
-                if (mgmtObjectArray[j].country == countries[countries.length - 1]) {
-                    if (paymentTypeCount[mgmtObjectArray[j].paymentType] == undefined) {
-                    paymentTypeCount[mgmtObjectArray[j].paymentType] = 1;
-                    }else {
-                    paymentTypeCount[mgmtObjectArray[j].paymentType]++;
-                    }// format for TopTxnFailReason
-//                    if (paymentTypeCount[mgmtObjectArray[j].paymentType] == undefined) {
-//                    paymentTypeCount[mgmtObjectArray[j].paymentType] = 1;
-//                    }else {
-//                    paymentTypeCount[mgmtObjectArray[j].paymentType]++;
-//                    }
-                }
-            }
-            let topPT = "";
-            let topPaymentTypeCount = 0;
-            for (let key in topPaymentTypeCount) {
-                if (paymentTypeCount[key] > topPaymentTypeCount) {
-                    topPT = key;
-                    topPaymentTypeCount = paymentTypeCount[key];
-                }
-            }
-            /*paymentType*/topPaymentType.push(topPT);
-            totalOrders.push(0);
-        }
-
-        let countryIndex = countries.indexOf(mgmtObjectArray[i].country);
-        let totalProductSold = productSold.indexOf(mgmtObjectArray[i].qty);
-        let totalRevenue = revenue.indexOf(mgmtObjectArray[i].price);
-        if (mgmtObjectArray[i].txnStatus == "Y") {
-            txnSuccess[countryIndex]++;
-            totalProductSold = totalProductSold + mgmtObjectArray[i].qty;
-            totalRevenue = totalRevenue + mgmtObjectArray[i].price;
-
-        } else {
-            txnFailed[countryIndex]++;
-        }
-        totalOrders[countryIndex]++;
+  
 
     
     // Create table body
