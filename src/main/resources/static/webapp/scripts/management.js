@@ -84,7 +84,8 @@ function getByCountry(){
     let header = [
         "Country",
         "Top Payment Type",
-        "Total Potential Revenue", // arrow
+        "Total Potential Revenue",
+        "Total Realized Revenue", // arrow
         "Top Product Sold", // arrow
         "Transaction Success Rates", // arrow
         "Total Orders",
@@ -125,6 +126,12 @@ function getByCountry(){
         revenue.innerHTML = round(mainMap.get(key).get("Revenue"));
        
         row.appendChild(revenue);
+
+        let realRevenue = document.createElement("td");
+        realRevenue.innerHTML = round(mainMap.get(key).get("Revenue")*(mainMap.get(key).get("TransSuc")/(mainMap.get(key).get("TransSuc")+mainMap.get(key).get("TransFail"))));
+       
+        row.appendChild(realRevenue);
+
         let productSold = document.createElement("td");
         productSold.innerHTML = mainMap.get(key).get("TopProductType");
         
