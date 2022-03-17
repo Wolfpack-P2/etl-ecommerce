@@ -30,7 +30,7 @@ public class OrderEntity {
     private Double price;
 
     @Column(name="qty")
-    private int qty;
+    private Integer qty;
 
     @Override
     public String toString() {
