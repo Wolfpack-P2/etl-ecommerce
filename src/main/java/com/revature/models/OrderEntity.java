@@ -32,15 +32,15 @@ public class OrderEntity {
     @Column(name="qty")
     private Integer qty;
 
-    @Override
-    public String toString() {
-        return "OrderEntity{" +
-                "orderId=" + orderId +
-                ", productName='" + productName + '\'' +
-                ", ecomWeb='" + ecomWeb + '\'' +
-                ", orderDate=" + orderDate +
-                ", price=" + price +
-                ", qty=" + qty +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "OrderEntity{" +
+//                "orderId=" + orderId +
+//                ", productName='" + productName + '\'' +
+//                ", ecomWeb='" + ecomWeb + '\'' +
+//                ", orderDate=" + orderDate +
+//                ", price=" + price +
+//                ", qty=" + qty +
+//                '}';
+//    }
 }
