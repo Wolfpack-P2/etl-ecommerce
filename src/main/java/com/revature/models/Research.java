@@ -33,6 +33,7 @@ public class Research {
     
     @Column(name = "total_price")
     private BigDecimal totalPrice;
+    // Maybe: just the price, not counting the quantity
 
     @Column(name = "day_of_week")
     private Double dayOfWeek;

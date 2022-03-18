@@ -7,7 +7,7 @@
 // TABLES
 //What is the top selling category of items Per Country? (country table- most popular item)
 //How does the popularity of products change throughout the year Per Country? (country table - view button)
-//Which locations see the highest traffic of sales?(country table - highest performing city)
+//Which locations see the highest traffic of sales?(country table - highest city)
 //What times have the highest traffic of sales? Per Country? (country table-highest traffic)
 function $(x) {
     return document.getElementById(x)
