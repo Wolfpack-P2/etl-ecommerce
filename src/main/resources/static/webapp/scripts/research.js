@@ -11,6 +11,7 @@ $(document).ready(function () {
     getAllResearch();
 });
 
+
 function getAllResearch(){
     let xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function () {
@@ -46,27 +47,35 @@ function getAllResearch(){
             });
             thead.appendChild(headerRow);
 
+            // push response into researchArray
             let researchArray = [];
             for (let i = 0; i < response.length; i++) {
                 let research = response[i];
                 researchArray.push(research);
             }
+            //
             let countries = [];
-            let averageSale = [];
-            let averageQty = [];
-            for(let i = 0; i < researchArray.length; i++){
-                if (countries.indexOf(researchArray[i].country) == -1) {
-                    countries.push(researchArray[i].country);
-                    averageSale.push(0);
-                    averageQty.push(0);
+            let totalSales = []
+            let totalProductSold = [];
+            let totalSuxTrans= [];
 
-                    let countryIndex = countries.indexOf(researchArray[i].country);
-                    if (researchArray[i].paymentTxnSuccess == "Y"){
-                        averageSale[countryIndex] += researchArray[i].totalPrice;
-                        averageQty[countryIndex] += researchArray[i].qty;
-                    }
+            for(let i = 0; i < researchArray.length; i++){
+                if (countries.indexOf(researchArray[i].country) == -1) { // if the country doesnt exist in country array
+                    countries.push(researchArray[i].country); // push into country array
+                    totalSales.push(0); // array of sales
+                    totalProductSold.push(0); // array of quantities
+                    totalSuxTrans.push(0);
+
                 }
-           }
+                let countryIndex = countries.indexOf(researchArray[i].country); // finds in countries the index of the country that matches the country at I of research array
+                if (researchArray[i].paymentTxnSuccess == 'Y'){
+                    totalSales[countryIndex] += researchArray[i].totalPrice; // if transaction is successful, add total price at i to total sales at the countries index
+                    totalProductSold[countryIndex] += researchArray[i].qty; // country product sold if payment successful
+                    totalSuxTrans[countryIndex]++;
+
+                }
+             }
+
             for (let i = 0; i < countries.length; i++) {
                 let row = document.createElement("tr");
                 let country = document.createElement("td");
@@ -74,11 +83,11 @@ function getAllResearch(){
                 row.appendChild(country);
 
                 let sale = document.createElement("td");
-                sale.innerHTML = averageSale[i];
+                sale.innerHTML = (totalSales[i] == 0) ? "0" : ((totalSales[i]/totalSuxTrans[i]).toFixed(2));//((totalSales[i]/totalSuxTrans[i]).toFixed(2));
                 row.appendChild(sale);
 
                 let qty = document.createElement("td");
-                qty.innerHTML = averageQty[i];
+                qty.innerHTML = (totalProductSold[i] == 0) ? "0" : ((totalProductSold[i]/totalSuxTrans[i]).toFixed(0));//((totalProductSold[i]/totalSuxTrans[i]).toFixed(2));
                 row.appendChild(qty);
 
                 table.append(row);
