@@ -48,17 +48,15 @@ function getAllFacts(){
             console.log("-----------Begin-----------------")
             if (xhr.readyState == 4 && xhr.status == 200) {
                 let response = JSON.parse(xhr.responseText);
-                console.log(response);
-//                 for(let i = 0; i < response.length; i++){
-//                     factsArray.push(response[i]);
-//                 }
+                
+
                 factsArray = response;
                 console.log(factsArray);
                 getByCountry();
             }
         }
 
-        xhr.open("GET", "http://localhost:8080/ETL-E-Commerce/facts", true);
+        xhr.open("GET", "http://localhost:8080/ETL-E-Commerce/management", true);
         xhr.send();
        getTxnChartData();
        getTypeChartData();
@@ -93,9 +91,7 @@ function getByCountry(){
         "Top Payment Type",
         "Total Potential Revenue",
         "Total Realized Revenue", // arrow
-        "Top Product Sold", // arrow
-        "Transaction Success Rates", // arrow
-        "Total Orders",
+        "Transaction Success Rates" // arrow
         //"Top Transaction Failure Reason"
     ];
 
@@ -137,19 +133,12 @@ function getByCountry(){
        
         row.appendChild(realRevenue);
 
-        let productSold = document.createElement("td");
-        productSold.innerHTML = mainMap.get(key).get("TopProductType");
         
-        row.appendChild(productSold);
         let txnSuccess = document.createElement("td");
         txnSuccess.innerHTML = round(((mainMap.get(key).get("TransSuc")/(mainMap.get(key).get("TransSuc")+mainMap.get(key).get("TransFail")))*100));
         
         row.appendChild(txnSuccess);
-        let totalOrders = document.createElement("td");
-        totalOrders.innerHTML = mainMap.get(key).get("TotalOrder");
-        
-
-        row.appendChild(totalOrders);
+    
         table.append(row);
 
    
@@ -229,10 +218,9 @@ function getTypeChartData(){
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 4 && xhr.status == 200) {
             let response = JSON.parse(xhr.responseText);
-            console.log(response)
+           
             arr = paymentType1(response);
-            console.log(arr);
-
+            
             let ctx = document.getElementById('barChart1').getContext('2d');
             let myChart = new Chart(ctx, {
                 type: 'bar',
@@ -274,7 +262,7 @@ function paymentType1(data){
         theMap.set(data[i]['paymentType'],0)
 
     }
-    console.log(theMap)
+   
     for( i=0;i<data.length;i++){
        
         theMap.set(data[i]['paymentType'],theMap.get(data[i]['paymentType'])+1)
@@ -320,87 +308,63 @@ function createTable(data){
     topPymntType=''
     topProductType=''
     for(i=0; i<data.length;i++){
-        if(map.get(data[i].customerEntity.country)==undefined){
-        map.set(data[i].customerEntity.country,new Map())}
-        map.get(data[i].customerEntity.country).set('Revenue',0)
-        map.get(data[i].customerEntity.country).set('TransSuc',0)
-        map.get(data[i].customerEntity.country).set('TransFail',0)
-        map.get(data[i].customerEntity.country).set('TotalOrder',0)
+        if(map.get(data[i].country)==undefined){
+        map.set(data[i].country,new Map())}
+        map.get(data[i].country).set('Revenue',0)
+        map.get(data[i].country).set('TransSuc',0)
+        map.get(data[i].country).set('TransFail',0)
+       
 
-        if(map.get(data[i].customerEntity.country).get('Products')==undefined){
-            map.get(data[i].customerEntity.country).set('Products',new Map())}
-            map.get(data[i].customerEntity.country).get('Products').set(data[i].productEntity.productName,0)
-
-        if(map.get(data[i].customerEntity.country).get('PaymentType')==undefined){
-            map.get(data[i].customerEntity.country).set('PaymentType',new Map())}
-            map.get(data[i].customerEntity.country).get('PaymentType').set(data[i].paymentEntity.paymentType,0)
+        if(map.get(data[i].country).get('PaymentType')==undefined){
+            map.get(data[i].country).set('PaymentType',new Map())}
+            map.get(data[i].country).get('PaymentType').set(data[i].paymentType,0)
         
         
         
     }
-    console.log(map)
+   
     for(i=0; i<data.length;i++){
         
        
-        map.get(data[i].customerEntity.country).set('Revenue',
-        map.get(data[i].customerEntity.country).get('Revenue')+
-        data[i].orderEntity.price*data[i].orderEntity.qty)
+        map.get(data[i].country).set('Revenue',
+        map.get(data[i].country).get('Revenue')+
+        data[i].potentialRevenue)
 
 
             
-        if(data[i].paymentEntity.paymentTxnSuccess=='Y'){
-            map.get(data[i].customerEntity.country).set('TransSuc',
-            map.get(data[i].customerEntity.country).get('TransSuc')+1) 
+        if(data[i].paymentTxnSuccess=='Y'){
+            map.get(data[i].country).set('TransSuc',
+            map.get(data[i].country).get('TransSuc')+1) 
         }else{
-            map.get(data[i].customerEntity.country).set('TransFail',
-            map.get(data[i].customerEntity.country).get('TransFail')+1) 
+            map.get(data[i].country).set('TransFail',
+            map.get(data[i].country).get('TransFail')+1) 
         }
 
-        
-        map.get(data[i].customerEntity.country).set('TotalOrder',
-        map.get(data[i].customerEntity.country).get('TotalOrder')+data[i].orderEntity.qty)
+        map.get(data[i].country).get('PaymentType').set(data[i].paymentType,
+        map.get(data[i].country).get('PaymentType').get(data[i].paymentType)+1)
 
-        map.get(data[i].customerEntity.country).get('PaymentType').set(data[i].paymentEntity.paymentType,
-        map.get(data[i].customerEntity.country).get('PaymentType').get(data[i].paymentEntity.paymentType)+1)
-
-        map.get(data[i].customerEntity.country).get('Products').set(data[i].productEntity.productName,
-            map.get(data[i].customerEntity.country).get('Products').get(data[i].productEntity.productName)+1)
+      
         
         
     }
-    for(i=0;i<data.length;i++){
-        for(let key of map.get(data[i].customerEntity.country).get('Products').keys()){
-            if(map.get(data[i].customerEntity.country).get('Products').get(key)>startVal){
-                topProductType=key
-                startVal=map.get(data[i].customerEntity.country).get('Products').get(key)
-            }
-
-
-        }
-        map.get(data[i].customerEntity.country).set('TopProductType',topProductType)
-        topProductType=''
-        startVal=0
-
-  
-    
-}
+   
 for(i=0;i<data.length;i++){
-    for(let key of map.get(data[i].customerEntity.country).get('PaymentType').keys()){
-        if(map.get(data[i].customerEntity.country).get('PaymentType').get(key)>startVal){
+    for(let key of map.get(data[i].country).get('PaymentType').keys()){
+        if(map.get(data[i].country).get('PaymentType').get(key)>startVal){
             topPaymntType=key
-            startVal=map.get(data[i].customerEntity.country).get('PaymentType').get(key)
+            startVal=map.get(data[i].country).get('PaymentType').get(key)
         }
 
 
     }
-    map.get(data[i].customerEntity.country).set('TopPaymentType',topPaymntType)
+    map.get(data[i].country).set('TopPaymentType',topPaymntType)
     topPaymentType=''
     startVal=0
 
 
 
 }
-console.log(map)
+
 
 return map;
 

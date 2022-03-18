@@ -4,12 +4,15 @@ import lombok.*;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
+import java.util.Objects;
+
 @Component
 @Entity
 @Table(name="payment_table")
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
 public class PaymentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,5 +36,18 @@ public class PaymentEntity {
                 ", paymentType='" + paymentType + '\'' +
                 ", paymentTxnSuccess='" + paymentTxnSuccess + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PaymentEntity that = (PaymentEntity) o;
+        return Objects.equals(paymentTxnId, that.paymentTxnId) && Objects.equals(failureReason, that.failureReason) && Objects.equals(paymentType, that.paymentType) && Objects.equals(paymentTxnSuccess, that.paymentTxnSuccess);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(paymentTxnId, failureReason, paymentType, paymentTxnSuccess);
     }
 }

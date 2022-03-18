@@ -5,12 +5,14 @@ import lombok.*;
 import javax.persistence.*;
 
 import java.sql.Timestamp;
+import java.util.Objects;
 
 @Entity
 @Table(name = "order_table")
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
 public class OrderEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,5 +44,18 @@ public class OrderEntity {
                 ", price=" + price +
                 ", qty=" + qty +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OrderEntity that = (OrderEntity) o;
+        return Objects.equals(orderId, that.orderId) && Objects.equals(productName, that.productName) && Objects.equals(ecomWeb, that.ecomWeb) && Objects.equals(orderDate, that.orderDate) && Objects.equals(price, that.price) && Objects.equals(qty, that.qty);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(orderId, productName, ecomWeb, orderDate, price, qty);
     }
 }

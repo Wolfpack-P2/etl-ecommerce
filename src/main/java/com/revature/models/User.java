@@ -11,6 +11,7 @@ import javax.persistence.*;
 @ToString
 @Getter
 @Setter
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class User {
 
     @Id
