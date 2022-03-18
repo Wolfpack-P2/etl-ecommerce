@@ -129,7 +129,7 @@ function getByCountry(){
         row.appendChild(revenue);
 
         let realRevenue = document.createElement("td");
-        realRevenue.innerHTML = round(mainMap.get(key).get("Revenue")*(mainMap.get(key).get("TransSuc")/(mainMap.get(key).get("TransSuc")+mainMap.get(key).get("TransFail"))));
+        realRevenue.innerHTML = round(mainMap.get(key).get("RealRev"));
        
         row.appendChild(realRevenue);
 
@@ -311,6 +311,7 @@ function createTable(data){
         if(map.get(data[i].country)==undefined){
         map.set(data[i].country,new Map())}
         map.get(data[i].country).set('Revenue',0)
+        map.get(data[i].country).set('RealRev',0)
         map.get(data[i].country).set('TransSuc',0)
         map.get(data[i].country).set('TransFail',0)
        
@@ -335,6 +336,9 @@ function createTable(data){
         if(data[i].paymentTxnSuccess=='Y'){
             map.get(data[i].country).set('TransSuc',
             map.get(data[i].country).get('TransSuc')+1) 
+
+            map.get(data[i].country).set('RealRev',
+            map.get(data[i].country).get('RealRev')+data[i].potentialRevenue) 
         }else{
             map.get(data[i].country).set('TransFail',
             map.get(data[i].country).get('TransFail')+1) 

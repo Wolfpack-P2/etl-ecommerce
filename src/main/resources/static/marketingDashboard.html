@@ -12,6 +12,10 @@
     <link rel="stylesheet" href="webapp/styles/dataTables.bootstrap5.min.css" />
     <link rel="stylesheet" href="webapp/styles/style.css">
     <title>Data Analytics Dashboard</title>
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script>$(document).ready(function () {
+      getQ3Data();
+    });</script>
   </head>
   <body>
 
@@ -223,7 +227,7 @@
                  Product Popularity Change <!--Line Graph CHARTjs HERE!-->
               </div>
               <div class="card-body">
-                <canvas class="chart" width="400" height="200"></canvas>
+                <canvas class="chart" width="400" height="200" id="Q3"></canvas>
               </div>
             </div>
           </div>
