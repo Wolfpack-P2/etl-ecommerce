@@ -226,7 +226,22 @@
                 <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
                  Product Popularity Change <!--Line Graph CHARTjs HERE!-->
               </div>
-              <div class="card-body">
+              <div id="1">
+                <label for="select x category">Choose a category for x axis:</label>
+                <select id="select x category" onchange="getQ3Data()">
+                   <option value="qty">Quantity</option>
+                  <option value="country">Country</option>
+                  <option value="city">City</option> </option>
+                  <option value="productCategory">Product Category</option>
+                  <option value="timeOfDay">Time of Day</option>
+                  <option value="months">Month</option> 
+                </select>
+                </div id="1"> 
+                <div id="2">
+                  <p>subcat</p>
+                </div>
+              <div class="card-body" id="q3Div">
+               
                 <canvas class="chart" width="400" height="200" id="Q3"></canvas>
               </div>
             </div>

@@ -9,10 +9,59 @@
 //How does the popularity of products change throughout the year Per Country? (country table - view button)
 //Which locations see the highest traffic of sales?(country table - highest city)
 //What times have the highest traffic of sales? Per Country? (country table-highest traffic)
-$(document).ready(function () {
-    marketingTable();
-});
-function mark
+function $(x) {
+    return document.getElementById(x)
+}
+x=0;
+
+let catUrl="http://localhost:8080/ETL-E-Commerce/order/category"
+/* function drawChart() {
+    // Define the chart to be drawn.
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', 'Element');
+    data.addColumn('number', 'Percentage');
+    data.addRows([
+      ['Nitrogen', 0.78],
+      ['Oxygen', 0.21],
+      ['Other', 0.01]
+    ]);
+
+    var options = {
+        backgroundColor: '#1b232e'
+    }
+
+    // Instantiate and draw the chart.
+    var chart = new google.visualization.PieChart($('my-pie-chart'));
+    chart.draw(data, options);
+  } */
+
+  function drawDataComp() {
+    let chartData = new google.visualization.arrayToDataTable([
+      ['Data', 'Clean', 'Dirty'],
+      [1000, 732, 268]
+    ])
+
+    let chart = new google.visualization.BarChart(document.getElementById('bar-div'));
+    let options = {
+      bars: 'horizontal',
+      width: '900',
+      backgroundColor: '#363c4d',
+      hAxis: {
+        textStyle: {
+          color: '#ffffff'
+        }
+      },
+      vAxis: {
+        textStyle: {
+          color: '#ffffff'
+        }
+      },
+      legend: {
+        textStyle: {
+          color: '#ffffff'
+        }
+      }
+    }
 
 
 
@@ -24,14 +73,23 @@ function mark
       //     access fail/success
       //     calculate percentage
       //     Display in pie chart
-  
+        select=document.getElementById('q3Div')
       
       let xhr = new XMLHttpRequest();
       xhr.onreadystatechange = function () {
           if (xhr.readyState == 4 && xhr.status == 200) {
               let response = JSON.parse(xhr.responseText);
              console.log(response)
-             arr=populateBarChart(response,10,'country');
+             if(x<1){
+             getCountrysAndDrDown(response)
+            }
+            x++;
+            if(document.getElementById("3").value=='All Countrys'||document.getElementById("select x category").value=='country'){
+              arr=populateBarChart(response,10,document.getElementById("select x category").value);
+              getCountrysAndDrDown(response)
+            }else{
+             arr=populateBarChart1(response,10,document.getElementById("select x category").value,document.getElementById("3").value);
+            }
                   let ctx = document.getElementById('Q3').getContext('2d');
                   let chartStatus = Chart.getChart('Q3');
                   if (chartStatus != undefined) {
@@ -124,6 +182,7 @@ function populateBarChart1(data,value,breakdown,country){
     
 }
 function populateBarChart(data,value,breakdown){
+  
   labelArr=[]
   barHeightArr=[]
   centralArray=[]
@@ -177,4 +236,33 @@ function populateBarChart(data,value,breakdown){
     return packagedArray;
       
     
+}
+function getCountrysAndDrDown(data){
+  map=new Map();
+  for(i=0; i<data.length;i++){
+    if(map.get(data[i].country)==undefined){
+    map.set(data[i].country,0)}
+
+}
+div=document.getElementById('2')
+div.innerHTML=""
+select=document.createElement('select')
+select.setAttribute('onchange',"getQ3Data()")
+select.setAttribute('id',"3")
+option1=document.createElement('option')
+option1.innerHTML="All Countrys"
+option1.setAttribute('value','All Countrys')
+ select.append(option1)
+
+for(let key of map.keys()){
+
+ option=document.createElement('option')
+ option.innerHTML=key
+ option.setAttribute('value',key)
+ select.append(option)
+  
+
+}
+div.append(select);
+
 }
