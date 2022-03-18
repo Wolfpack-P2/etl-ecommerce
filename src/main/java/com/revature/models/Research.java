@@ -4,6 +4,7 @@ import lombok.*;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.Objects;
 
 import javax.persistence.*;
 
@@ -11,7 +12,8 @@ import javax.persistence.*;
 @Table(name = "research")
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Setter
+@Getter
 public class Research {
 
     @Id 
@@ -34,4 +36,30 @@ public class Research {
 
     @Column(name = "day_of_week")
     private Double dayOfWeek;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Research research = (Research) o;
+        return Objects.equals(researchId, research.researchId) && Objects.equals(qty, research.qty) && Objects.equals(orderDate, research.orderDate) && Objects.equals(paymentTxnSuccess, research.paymentTxnSuccess) && Objects.equals(country, research.country) && Objects.equals(totalPrice, research.totalPrice) && Objects.equals(dayOfWeek, research.dayOfWeek);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(researchId, qty, orderDate, paymentTxnSuccess, country, totalPrice, dayOfWeek);
+    }
+
+    @Override
+    public String toString() {
+        return "Research{" +
+                "researchId=" + researchId +
+                ", qty=" + qty +
+                ", orderDate=" + orderDate +
+                ", paymentTxnSuccess='" + paymentTxnSuccess + '\'' +
+                ", country='" + country + '\'' +
+                ", totalPrice=" + totalPrice +
+                ", dayOfWeek=" + dayOfWeek +
+                '}';
+    }
 }

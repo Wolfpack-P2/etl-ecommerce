@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class FactEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
