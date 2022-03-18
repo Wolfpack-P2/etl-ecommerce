@@ -12,7 +12,7 @@
 function $(x) {
     return document.getElementById(x)
 }
-
+x=0;
 
 let catUrl="http://localhost:8080/ETL-E-Commerce/order/category"
 /* function drawChart() {
@@ -266,14 +266,23 @@ let catUrl="http://localhost:8080/ETL-E-Commerce/order/category"
       //     access fail/success
       //     calculate percentage
       //     Display in pie chart
-  
+        select=document.getElementById('q3Div')
       
       let xhr = new XMLHttpRequest();
       xhr.onreadystatechange = function () {
           if (xhr.readyState == 4 && xhr.status == 200) {
               let response = JSON.parse(xhr.responseText);
              console.log(response)
-             arr=populateBarChart(response,10,'country');
+             if(x<1){
+             getCountrysAndDrDown(response)
+            }
+            x++;
+            if(document.getElementById("3").value=='All Countrys'||document.getElementById("select x category").value=='country'){
+              arr=populateBarChart(response,10,document.getElementById("select x category").value);
+              getCountrysAndDrDown(response)
+            }else{
+             arr=populateBarChart1(response,10,document.getElementById("select x category").value,document.getElementById("3").value);
+            }
                   let ctx = document.getElementById('Q3').getContext('2d');
                   let chartStatus = Chart.getChart('Q3');
                   if (chartStatus != undefined) {
@@ -366,6 +375,7 @@ function populateBarChart1(data,value,breakdown,country){
     
 }
 function populateBarChart(data,value,breakdown){
+  
   labelArr=[]
   barHeightArr=[]
   centralArray=[]
@@ -419,4 +429,33 @@ function populateBarChart(data,value,breakdown){
     return packagedArray;
       
     
+}
+function getCountrysAndDrDown(data){
+  map=new Map();
+  for(i=0; i<data.length;i++){
+    if(map.get(data[i].country)==undefined){
+    map.set(data[i].country,0)}
+
+}
+div=document.getElementById('2')
+div.innerHTML=""
+select=document.createElement('select')
+select.setAttribute('onchange',"getQ3Data()")
+select.setAttribute('id',"3")
+option1=document.createElement('option')
+option1.innerHTML="All Countrys"
+option1.setAttribute('value','All Countrys')
+ select.append(option1)
+
+for(let key of map.keys()){
+
+ option=document.createElement('option')
+ option.innerHTML=key
+ option.setAttribute('value',key)
+ select.append(option)
+  
+
+}
+div.append(select);
+
 }
