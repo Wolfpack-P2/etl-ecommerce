@@ -74,13 +74,8 @@ function getAllResearch(){
                     totalSuxTrans[countryIndex]++;
 
                 }
-
-                console.log(totalSales[0]);
              }
 
-
-
-           console.log(index);
             for (let i = 0; i < countries.length; i++) {
                 let row = document.createElement("tr");
                 let country = document.createElement("td");
@@ -88,11 +83,11 @@ function getAllResearch(){
                 row.appendChild(country);
 
                 let sale = document.createElement("td");
-                sale.innerHTML = ((totalSales[i]/totalSuxTrans[i]).toFixed(2));
+                sale.innerHTML = (totalSales[i] == 0) ? "0" : ((totalSales[i]/totalSuxTrans[i]).toFixed(2));//((totalSales[i]/totalSuxTrans[i]).toFixed(2));
                 row.appendChild(sale);
 
                 let qty = document.createElement("td");
-                qty.innerHTML = ((totalProductSold[i]/totalSuxTrans[i]).toFixed(2));
+                qty.innerHTML = (totalProductSold[i] == 0) ? "0" : ((totalProductSold[i]/totalSuxTrans[i]).toFixed(0));//((totalProductSold[i]/totalSuxTrans[i]).toFixed(2));
                 row.appendChild(qty);
 
                 table.append(row);
