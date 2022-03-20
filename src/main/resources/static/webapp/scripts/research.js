@@ -18,8 +18,8 @@ function getAllResearch(){
             if (xhr.readyState == 4 && xhr.status == 200) {
                 let response = JSON.parse(xhr.responseText);
                 console.log(response);
-            let x = document.getElementById("researchTable");
-            x.remove();
+//            let x = document.getElementById("researchTable");
+//            x.remove();
 
             let table = document.createElement("table");
             table.setAttribute("id", "researchTable");
@@ -89,11 +89,11 @@ function getAllResearch(){
                 let qty = document.createElement("td");
                 qty.innerHTML = (totalProductSold[i] == 0) ? "0" : ((totalProductSold[i]/totalSuxTrans[i]).toFixed(0));//((totalProductSold[i]/totalSuxTrans[i]).toFixed(2));
                 row.appendChild(qty);
+                tbody.appendChild(row);
 
-                table.append(row);
+//                table.append(row);
             }
-
-//            sorttable.makeSortable(table);
+            sorttable.makeSortable(table);
 
         }
     }
