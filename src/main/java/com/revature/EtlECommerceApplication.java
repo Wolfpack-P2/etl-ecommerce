@@ -8,8 +8,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
-@EnableJpaRepositories("com.revature.repositories")
-@EntityScan("com.revature.models")
+@EnableJpaRepositories("com.revature")
+@EntityScan("com.revature")
 @ComponentScan("com.revature")
 @EnableTransactionManagement
 public class EtlECommerceApplication {
