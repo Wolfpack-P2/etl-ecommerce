@@ -9,8 +9,9 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@Getter
-@Setter
+@Data
+//@Getter
+//@Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class User {
 

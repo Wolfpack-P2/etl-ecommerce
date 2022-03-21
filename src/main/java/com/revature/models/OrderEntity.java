@@ -11,8 +11,9 @@ import java.util.Objects;
 @Table(name = "order_table")
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
+//@Getter
+//@Setter
+@Data
 public class OrderEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

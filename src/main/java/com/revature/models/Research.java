@@ -12,8 +12,9 @@ import javax.persistence.*;
 @Table(name = "research")
 @NoArgsConstructor
 @AllArgsConstructor
-@Setter
-@Getter
+//@Setter
+//@Getter
+@Data
 public class Research {
 
     @Id 
