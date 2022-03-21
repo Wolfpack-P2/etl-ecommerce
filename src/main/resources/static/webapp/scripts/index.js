@@ -87,7 +87,7 @@ async function register() {
     return resp.text()
   })
   .then((data) => {
-    if (data == 'success') {  
+    if (data == 'User registered') {  
       alert("Registration Successful, Please Log In")
       location.reload()  
     } else {
