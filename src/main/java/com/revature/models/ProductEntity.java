@@ -9,8 +9,9 @@ import java.util.Objects;
 @Table(name="product_table")
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
+//@Getter
+//@Setter
+@Data
 public class ProductEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

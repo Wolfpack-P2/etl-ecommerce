@@ -11,8 +11,9 @@ import java.util.Objects;
 @Table(name="payment_table")
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
+//@Getter
+//@Setter
+@Data
 public class PaymentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

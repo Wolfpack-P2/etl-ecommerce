@@ -12,8 +12,7 @@ import javax.persistence.*;
 @Table(name = "marketing")
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
+@Data
 public class Marketing {
     
     @Id
