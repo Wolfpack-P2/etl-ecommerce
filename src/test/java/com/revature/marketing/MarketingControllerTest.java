@@ -2,9 +2,6 @@ package com.revature.marketing;
 
 import java.util.List;
 
-import com.revature.marketing.Marketing;
-import com.revature.marketing.MarketingController;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

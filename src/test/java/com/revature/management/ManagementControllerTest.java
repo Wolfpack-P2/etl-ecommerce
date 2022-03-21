@@ -2,9 +2,6 @@ package com.revature.management;
 
 import java.util.List;
 
-import com.revature.management.Management;
-import com.revature.management.ManagementController;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

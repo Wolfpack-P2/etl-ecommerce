@@ -2,9 +2,6 @@ package com.revature.research;
 
 import java.util.List;
 
-import com.revature.research.Research;
-import com.revature.research.ResearchController;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

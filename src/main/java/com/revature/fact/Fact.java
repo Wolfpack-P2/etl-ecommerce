@@ -16,7 +16,6 @@ import java.math.BigDecimal;
 @Table(name="fact_table1")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Fact implements Serializable {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
@@ -24,38 +23,23 @@ public class Fact implements Serializable {
 
     @OneToOne
     @JoinColumn(name="order_id")
-    private Order orderEntity;
+    private Order order;
 
     @ManyToOne
     @JoinColumn(name="customer_name")
-    private Customer customerEntity;
+    private Customer customer;
 
     @ManyToOne
     @JoinColumn(name="product_name")
-    private Product productEntity;
+    private Product product;
 
     @Column(name="price")
     private BigDecimal price;
 
     @OneToOne
     @JoinColumn(name="payment_txn_id")
-    private Payment paymentEntity;
+    private Payment payment;
 
-    // No args constructor
-    public Fact() {
-        super();
-    }
-
-    // All args constructor
-    public Fact(Order orderEntity, Customer customerEntity, Product productEntity, BigDecimal price, Payment paymentEntity) {
-        this.orderEntity = orderEntity;
-        this.customerEntity = customerEntity;
-        this.productEntity = productEntity;
-        this.price = price;
-        this.paymentEntity = paymentEntity;
-    }
-
-    // Getters and setters
     public Integer getId() {
         return id;
     }
@@ -64,28 +48,28 @@ public class Fact implements Serializable {
         this.id = id;
     }
 
-    public Order getOrderEntity() {
-        return orderEntity;
+    public Order getOrder() {
+        return order;
     }
 
-    public void setOrderEntity(Order orderEntity) {
-        this.orderEntity = orderEntity;
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
-    public Customer getCustomerEntity() {
-        return customerEntity;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setCustomerEntity(Customer customerEntity) {
-        this.customerEntity = customerEntity;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
-    public Product getProductEntity() {
-        return productEntity;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProductEntity(Product productEntity) {
-        this.productEntity = productEntity;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public BigDecimal getPrice() {
@@ -96,24 +80,23 @@ public class Fact implements Serializable {
         this.price = price;
     }
 
-    public Payment getPaymentEntity() {
-        return paymentEntity;
+    public Payment getPayment() {
+        return payment;
     }
 
-    public void setPaymentEntity(Payment paymentEntity) {
-        this.paymentEntity = paymentEntity;
+    public void setPayment(Payment payment) {
+        this.payment = payment;
     }
 
-    // toString
     @Override
     public String toString() {
         return "Fact{" +
                 "id=" + id +
-                ", orderEntity=" + orderEntity +
-                ", customerEntity=" + customerEntity +
-                ", productEntity=" + productEntity +
+                ", order=" + order +
+                ", customer=" + customer +
+                ", product=" + product +
                 ", price=" + price +
-                ", paymentEntity=" + paymentEntity +
+                ", payment=" + payment +
                 '}';
     }
 }

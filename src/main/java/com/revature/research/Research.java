@@ -117,7 +117,6 @@ public class Research {
         return Objects.hash(researchId, qty, orderDate, paymentTxnSuccess, country, totalPrice, dayOfWeek);
     }
 
-    // toString
     @Override
     public String toString() {
         return "Research{" +

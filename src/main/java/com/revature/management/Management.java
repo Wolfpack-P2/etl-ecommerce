@@ -93,7 +93,6 @@ public class Management {
         return Objects.hash(managementId, paymentType, country, potentialRevenue, paymentTxnSuccess);
     }
 
-    // toString
     @Override
     public String toString() {
         return "Management{" +

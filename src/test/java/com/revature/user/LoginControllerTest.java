@@ -1,8 +1,5 @@
 package com.revature.user;
 
-import com.revature.user.LoginController;
-import com.revature.user.User;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -62,11 +62,6 @@ public class Product {
         return Objects.equals(productName, that.productName) && Objects.equals(productCategory, that.productCategory) && Objects.equals(averagePrice, that.averagePrice);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(productName, productCategory, averagePrice);
-    }
-
     // toString
     @Override
     public String toString() {
@@ -76,4 +71,10 @@ public class Product {
                 ", averagePrice=" + averagePrice +
                 '}';
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(productName, productCategory, averagePrice);
+    }
+
 }

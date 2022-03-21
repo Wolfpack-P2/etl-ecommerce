@@ -1,7 +1,5 @@
 package com.revature.marketing;
 
-import lombok.*;
-
 import java.sql.Timestamp;
 import java.util.Objects;
 
