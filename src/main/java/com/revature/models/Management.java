@@ -43,6 +43,46 @@ public class Management {
         return Objects.hash(managementId, paymentType, country, potentialRevenue, paymentTxnSuccess);
     }
 
+    public Integer getManagementId() {
+        return managementId;
+    }
+
+    public void setManagementId(Integer managementId) {
+        this.managementId = managementId;
+    }
+
+    public String getPaymentType() {
+        return paymentType;
+    }
+
+    public void setPaymentType(String paymentType) {
+        this.paymentType = paymentType;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public BigDecimal getPotentialRevenue() {
+        return potentialRevenue;
+    }
+
+    public void setPotentialRevenue(BigDecimal potentialRevenue) {
+        this.potentialRevenue = potentialRevenue;
+    }
+
+    public String getPaymentTxnSuccess() {
+        return paymentTxnSuccess;
+    }
+
+    public void setPaymentTxnSuccess(String paymentTxnSuccess) {
+        this.paymentTxnSuccess = paymentTxnSuccess;
+    }
+
     @Override
     public String toString() {
         return "Management{" +

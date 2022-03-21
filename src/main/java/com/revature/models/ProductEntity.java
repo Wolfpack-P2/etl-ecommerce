@@ -33,9 +33,28 @@ public class ProductEntity {
         return Objects.equals(productName, that.productName) && Objects.equals(productCategory, that.productCategory) && Objects.equals(averagePrice, that.averagePrice);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(productName, productCategory, averagePrice);
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public String getProductCategory() {
+        return productCategory;
+    }
+
+    public void setProductCategory(String productCategory) {
+        this.productCategory = productCategory;
+    }
+
+    public Double getAveragePrice() {
+        return averagePrice;
+    }
+
+    public void setAveragePrice(Double averagePrice) {
+        this.averagePrice = averagePrice;
     }
 
     @Override
@@ -46,4 +65,10 @@ public class ProductEntity {
                 ", averagePrice=" + averagePrice +
                 '}';
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(productName, productCategory, averagePrice);
+    }
+
 }
