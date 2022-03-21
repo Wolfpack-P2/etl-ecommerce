@@ -52,6 +52,62 @@ public class Research {
         return Objects.hash(researchId, qty, orderDate, paymentTxnSuccess, country, totalPrice, dayOfWeek);
     }
 
+    public Integer getResearchId() {
+        return researchId;
+    }
+
+    public void setResearchId(Integer researchId) {
+        this.researchId = researchId;
+    }
+
+    public Integer getQty() {
+        return qty;
+    }
+
+    public void setQty(Integer qty) {
+        this.qty = qty;
+    }
+
+    public Timestamp getOrderDate() {
+        return orderDate;
+    }
+
+    public void setOrderDate(Timestamp orderDate) {
+        this.orderDate = orderDate;
+    }
+
+    public String getPaymentTxnSuccess() {
+        return paymentTxnSuccess;
+    }
+
+    public void setPaymentTxnSuccess(String paymentTxnSuccess) {
+        this.paymentTxnSuccess = paymentTxnSuccess;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public BigDecimal getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(BigDecimal totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public Double getDayOfWeek() {
+        return dayOfWeek;
+    }
+
+    public void setDayOfWeek(Double dayOfWeek) {
+        this.dayOfWeek = dayOfWeek;
+    }
+
     @Override
     public String toString() {
         return "Research{" +

@@ -49,6 +49,70 @@ public class Marketing {
         return Objects.hash(marketingId, productCategory, qty, orderDate, country, city, timeOfDay, months);
     }
 
+    public Integer getMarketingId() {
+        return marketingId;
+    }
+
+    public void setMarketingId(Integer marketingId) {
+        this.marketingId = marketingId;
+    }
+
+    public String getProductCategory() {
+        return productCategory;
+    }
+
+    public void setProductCategory(String productCategory) {
+        this.productCategory = productCategory;
+    }
+
+    public Integer getQty() {
+        return qty;
+    }
+
+    public void setQty(Integer qty) {
+        this.qty = qty;
+    }
+
+    public Timestamp getOrderDate() {
+        return orderDate;
+    }
+
+    public void setOrderDate(Timestamp orderDate) {
+        this.orderDate = orderDate;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public Integer getTimeOfDay() {
+        return timeOfDay;
+    }
+
+    public void setTimeOfDay(Integer timeOfDay) {
+        this.timeOfDay = timeOfDay;
+    }
+
+    public Integer getMonths() {
+        return months;
+    }
+
+    public void setMonths(Integer months) {
+        this.months = months;
+    }
+
     @Override
     public String toString() {
         return "Marketing{" +
