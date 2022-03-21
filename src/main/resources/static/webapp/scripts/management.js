@@ -139,13 +139,15 @@ function getByCountry(){
         
         row.appendChild(txnSuccess);
     
-        table.append(row);
+//        table.append(row);
+tbody.appendChild(row);
 
    
     
-//    sorttable.makeSortable(table);
+
 
 }
+    sorttable.makeSortable(table);
 }
 
 
