@@ -9,6 +9,9 @@
 //How does the popularity of products change throughout the year Per Country? (country table - view button)
 //Which locations see the highest traffic of sales?(country table - highest city)
 //What times have the highest traffic of sales? Per Country? (country table-highest traffic)
+indForLineChart=5
+indForLineArr=[]
+globalResponse=[]
 function $(x) {
     return document.getElementById(x)
 }
@@ -63,9 +66,6 @@ let catUrl="http://localhost:8080/ETL-E-Commerce/order/category"
       }
     }
 
-
-
-
   }
 
     function getQ3Data(){
@@ -80,14 +80,16 @@ let catUrl="http://localhost:8080/ETL-E-Commerce/order/category"
           if (xhr.readyState == 4 && xhr.status == 200) {
               let response = JSON.parse(xhr.responseText);
              console.log(response)
+             globalResponse=response
              if(x<1){
-             getCountrysAndDrDown(response)
+             getCountrysAndDrDown(response,'2','3')
             }
             x++;
             if(document.getElementById("3").value=='All Countrys'||document.getElementById("select x category").value=='country'){
               arr=populateBarChart(response,10,document.getElementById("select x category").value);
-              getCountrysAndDrDown(response)
+              getCountrysAndDrDown(response,'2','3')
               xlabel = changeLabels(arr[0],document.getElementById("select x category").value);
+
             }else{
              arr=populateBarChart1(response,10,document.getElementById("select x category").value,document.getElementById("3").value);
              xlabel = changeLabels(arr[0],document.getElementById("select x category").value);
@@ -239,18 +241,18 @@ function populateBarChart(data,value,breakdown){
       
     
 }
-function getCountrysAndDrDown(data){
+function getCountrysAndDrDown(data,divId,setAttribId){
   map=new Map();
   for(i=0; i<data.length;i++){
     if(map.get(data[i].country)==undefined){
     map.set(data[i].country,0)}
 
 }
-div=document.getElementById('2')
+div=document.getElementById(divId)
 div.innerHTML=""
 select=document.createElement('select')
 select.setAttribute('onchange',"getQ3Data()")
-select.setAttribute('id',"3")
+select.setAttribute('id',setAttribId)
 option1=document.createElement('option')
 option1.innerHTML="All Countrys"
 option1.setAttribute('value','All Countrys')
@@ -338,3 +340,164 @@ function changeLabels(xData,value){
   return xlabels;
 
 }
+function getCountrysNoCleared(data,divId,setAttribId){
+  map=new Map();
+  for(i=0; i<data.length;i++){
+    if(map.get(data[i].country)==undefined){
+    map.set(data[i].country,0)}
+
+}
+div=document.getElementById(divId)
+
+select=document.createElement('select')
+select.setAttribute('onchange',"createLineChart()")
+select.setAttribute('id',setAttribId)
+
+for(let key of map.keys()){
+
+ option=document.createElement('option')
+ option.innerHTML=key
+ option.setAttribute('value',key)
+ select.append(option)
+  
+
+}
+div.append(select);
+
+}
+
+function populateLineChart(data,breakdown,country){
+  
+  labelArr=[]
+  barHeightArr=[]
+  centralArray=[]
+  packagedArray=[]
+    map=new Map();
+   
+ 
+    for(i=0; i<data.length;i++){
+      if(data[i].country==country){
+        map.set(data[i][breakdown],0)
+      }
+        
+       
+
+    }
+    for(i=0; i<data.length;i++){
+      if(data[i].country==country){
+      
+      map.set(data[i][breakdown],map.get(data[i][breakdown])+1)
+    }
+     
+    }
+    if(breakdown=="timeOfDay"){
+      for(i=0;i<24;i++){
+          labelArr.push(i);
+      }
+      for(t=0;t<labelArr.length;t++){
+        if(map.get(labelArr[t])==undefined){
+          barHeightArr.push(0)
+        }else{
+          barHeightArr.push(map.get(labelArr[t]))
+        }
+      }
+
+    }else{
+    for(i=1;i<13;i++){
+        labelArr.push(i);
+    }
+    for(t=0;t<labelArr.length;t++){
+      if(map.get(labelArr[t])==undefined){
+        barHeightArr.push(0)
+      }else{
+        barHeightArr.push(map.get(labelArr[t]))
+      }
+    }
+
+    }
+  
+    
+    
+
+packagedArray.push(labelArr) 
+packagedArray.push(barHeightArr)
+
+return packagedArray
+}
+    
+
+function createObjects(){
+  
+  labels1=[]
+  datasets1=[]
+  for(k=0;k<indForLineArr.length;k++){
+
+    let obj1={
+      label: document.getElementById(`${indForLineArr[k]}`).value,
+      fill: false,
+      borderColor: `rgba(${getRandInt(0, 225)}, ${getRandInt(0, 225)},${getRandInt(0, 225)},${getRandInt(0, 225)} )`,
+      data: populateLineChart(globalResponse,document.getElementById("select x category1").value,
+      document.getElementById(`${indForLineArr[k]}`).value)[1]
+      
+    }
+    
+    datasets1.push(obj1);
+  }
+
+
+  labels1=populateLineChart(globalResponse,document.getElementById("select x category1").value,
+  document.getElementById(`${indForLineArr[0]}`).value)[0]
+  data2={
+    labels:labels1,
+    datasets:datasets1
+  }
+  data={
+    labels:[3,1,2],
+    datasets:[{data:[1,3,4]}]
+  }
+  console.log(data2)
+return data2
+
+}
+
+function additionButtonPressed(){
+  getCountrysNoCleared(globalResponse,"lineId",indForLineChart);
+  indForLineArr.push(indForLineChart)
+  indForLineChart++;
+  createLineChart()
+  
+}
+
+function subtractionButtonPressed(){
+  document.getElementById(`${indForLineChart-1}`).remove()
+  indForLineArr.pop(indForLineChart)
+  indForLineChart--;
+  createLineChart()
+  
+  
+}
+function createLineChart(){
+  let ctx = document.getElementById("lineChart").getContext('2d');
+  let chartStatus = Chart.getChart("lineChart");
+  if (chartStatus != undefined) {
+      chartStatus.destroy();
+  }
+  let lineChart = new Chart(ctx, {
+    type: 'line',
+    data: createObjects(),
+    options: {
+      responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                display: false,
+                                beginAtZero: true
+                            }
+     
+    }
+  }});
+}
+function getRandInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1) + min)}
