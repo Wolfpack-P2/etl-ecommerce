@@ -173,6 +173,12 @@ function getTxnChartData(){
             document.getElementById("pieChartHeader").innerHTML = `<b>Overall Transaction Statistics:</b> ${dirtyVsClean}% Clean Data`;
 
             let labels = [];
+            let dirtyVsClean = (response.length/2000) * 100;
+            document.getElementById("pieChartHeader").innerHTML = `<b>Overall Transaction Statistics:</b> ${dirtyVsClean}% Clean Data`; 
+
+
+
+
             let data = [];
             for (let i = 0; i < response.length; i++) {
                 if (labels.indexOf(response[i].paymentTxnSuccess) == -1) {
