@@ -361,9 +361,7 @@ function createObjects(){
   labels1=[]
   datasets1=[]
   for(k=0;k<indForLineArr.length;k++){
-    console.log(indForLineArr[1])
-    console.log(indForLineArr.length)
-    console.log(document.getElementById(`${indForLineArr[k]}`).value)
+
     let obj1={
       label: document.getElementById(`${indForLineArr[k]}`).value,
       fill: false,
@@ -396,6 +394,16 @@ function additionButtonPressed(){
   getCountrysNoCleared(globalResponse,"lineId",indForLineChart);
   indForLineArr.push(indForLineChart)
   indForLineChart++;
+  createLineChart()
+  
+}
+
+function subtractionButtonPressed(){
+  document.getElementById(`${indForLineChart-1}`).remove()
+  indForLineArr.pop(indForLineChart)
+  indForLineChart--;
+  createLineChart()
+  
   
 }
 function createLineChart(){
