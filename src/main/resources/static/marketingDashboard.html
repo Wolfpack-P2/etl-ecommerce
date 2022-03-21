@@ -213,10 +213,19 @@
             <div class="card h-100">
               <div class="card-header">
                 <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
-                Top Product Categories <!--bar chart-->
+                Top Product Categories <!----Line chart-->
+              </div>
+              <div id="lineId">
+                <label for="select x category1">Choose a category for x axis:</label>
+                <select id="select x category1" onchange="createLineChart()">
+                  <option value="timeOfDay">Time of Day</option>
+                  <option value="months">Month</option> 
+                </select>
+                <button onclick="additionButtonPressed()">+</button>
+    
               </div>
               <div class="card-body">
-                <canvas class="chart" width="400" height="200"></canvas>
+                <canvas class="chart" id ="lineChart" width="400" height="200"></canvas>
               </div>
             </div>
           </div>
@@ -224,7 +233,7 @@
             <div class="card h-100">
               <div class="card-header">
                 <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
-                 Product Popularity Change <!--Line Graph CHARTjs HERE!-->
+                 Product Popularity Change <!--bar Graph CHARTjs HERE!-->
               </div>
               
               <div id="1">
@@ -239,7 +248,7 @@
                 </select>
                 </div id="1"> 
                 <div id="2">
-                  <p>subcat</p>
+                  
                 </div>
               <div class="card-body" id="q3Div">
               
