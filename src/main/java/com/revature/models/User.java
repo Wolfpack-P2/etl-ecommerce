@@ -3,7 +3,7 @@ package com.revature.models;
 import lombok.*;
 
 import javax.persistence.*;
-@Data
+
 @Entity(name = "users")
 @Table(name = "users")
 @NoArgsConstructor

@@ -69,7 +69,6 @@ let catUrl="http://localhost:8080/ETL-E-Commerce/order/category"
   }
 
 
-  }
 
     function getQ3Data(){
       //     Transactions failed:
