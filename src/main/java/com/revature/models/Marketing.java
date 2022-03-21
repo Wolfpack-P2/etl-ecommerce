@@ -2,7 +2,6 @@ package com.revature.models;
 
 import lombok.*;
 
-import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Objects;
 

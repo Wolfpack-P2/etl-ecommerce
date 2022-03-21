@@ -68,8 +68,6 @@ let catUrl="http://localhost:8080/ETL-E-Commerce/order/category"
 
   }
 
-
-
     function getQ3Data(){
       //     Transactions failed:
       //     access fail/success
@@ -101,8 +99,11 @@ let catUrl="http://localhost:8080/ETL-E-Commerce/order/category"
               arr=populateBarChart(response,10,document.getElementById("select x category").value);
               getCountrysAndDrDown(response,'2','3')
               
+              xlabel = changeLabels(arr[0],document.getElementById("select x category").value);
+              
             }else{
              arr=populateBarChart1(response,10,document.getElementById("select x category").value,document.getElementById("3").value);
+             xlabel = changeLabels(arr[0],document.getElementById("select x category").value);
             }
                   let ctx = document.getElementById('Q3').getContext('2d');
                   let chartStatus = Chart.getChart('Q3');
@@ -113,7 +114,7 @@ let catUrl="http://localhost:8080/ETL-E-Commerce/order/category"
                   let myChart = new Chart(ctx, {
                     type: 'bar',
                     data: {
-                        labels: arr[0],
+                        labels: xlabel,
                         datasets: [{
                             label: 'top tansactions per location',
                             data: arr[1],
@@ -280,6 +281,76 @@ for(let key of map.keys()){
 div.append(select);
 
 }
+
+
+function changeLabels(xData,value){
+  xlabels =[]
+  if(value == "qty" || value == "country" || value == "city" || value == "productCategory")
+  {
+    for (i = 0; i<xData.length;i++){
+      xlabels.push(xData[i])
+    }
+
+  }
+  else if(value == "timeOfDay"){
+    for (i = 0; i<xData.length;i++){
+      if (xData[i] > 12) {
+        newtime = xData[i] - 12;
+        xlabels.push(newtime +' PM')
+      }
+      if (xData[i] < 12) {
+        xlabels.push(xData[i]+' AM')
+      }
+    }
+
+
+  }
+  else if(value == "months"){
+    for (i = 0; i<xData.length;i++){
+      if (xData[i] == 1) {
+        xlabels.push("January")
+      }
+      if (xData[i] == 2) {
+        xlabels.push("February")
+      }
+      if (xData[i] == 3) {
+        xlabels.push("March")
+      }
+      if (xData[i] == 4) {
+        xlabels.push("April")
+      }
+      if (xData[i] == 5) {
+        xlabels.push("May")
+      }
+      if (xData[i] == 6) {
+        xlabels.push("June")
+      }
+      if (xData[i] == 7) {
+        xlabels.push("July")
+      }
+      if (xData[i] == 8) {
+        xlabels.push("August")
+      }
+      if (xData[i] == 9) {
+        xlabels.push("September")
+      }
+      if (xData[i] == 10) {
+        xlabels.push("October")
+      }
+      if (xData[i] == 11) {
+        xlabels.push("November")
+      }
+      if (xData[i] == 12) {
+        xlabels.push("December")
+      }
+
+    }
+
+  }
+  
+  return xlabels;
+
+}
 function getCountrysNoCleared(data,divId,setAttribId){
   map=new Map();
   for(i=0; i<data.length;i++){
@@ -371,9 +442,7 @@ function createObjects(){
   labels1=[]
   datasets1=[]
   for(k=0;k<indForLineArr.length;k++){
-    console.log(indForLineArr[1])
-    console.log(indForLineArr.length)
-    console.log(document.getElementById(`${indForLineArr[k]}`).value)
+
     let obj1={
       label: document.getElementById(`${indForLineArr[k]}`).value,
       fill: false,
@@ -406,6 +475,16 @@ function additionButtonPressed(){
   getCountrysNoCleared(globalResponse,"lineId",indForLineChart);
   indForLineArr.push(indForLineChart)
   indForLineChart++;
+  createLineChart()
+  
+}
+
+function subtractionButtonPressed(){
+  document.getElementById(`${indForLineChart-1}`).remove()
+  indForLineArr.pop(indForLineChart)
+  indForLineChart--;
+  createLineChart()
+  
   
 }
 function createLineChart(){
