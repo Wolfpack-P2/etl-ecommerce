@@ -15,6 +15,15 @@ function overallSpent(){
    xhr.onreadystatechange = function () {
        if (xhr.readyState == 4 && xhr.status == 200){
             let response = JSON.parse(xhr.responseText);
+
+            let dirtyVsClean = (response.length/2000) * 100;
+            document.getElementById("averageProducts").innerHTML = `<b>Average Products Purchased Per Transaction: </b>${dirtyVsClean}% Clean Data`; 
+                console.log(response.length);
+                let cleanVsDirty = (response.length/2000) * 100;
+            document.getElementById("averageAmount").innerHTML = `<b>Average Amount Spent Per Transaction: </b>${cleanVsDirty}% Clean Data`; 
+                console.log(response.length);
+
+
             let transCount = 0;
             totalSales = 0;
             totalQty = 0;
@@ -45,6 +54,12 @@ function getAllResearch(){
             if (xhr.readyState == 4 && xhr.status == 200) {
                 let response = JSON.parse(xhr.responseText);
                 console.log(response);
+
+                let dirtyVsClean = (response.length/2000) * 100;
+                document.getElementById("reportsCharts").innerHTML = `<b>Reports: </b>${dirtyVsClean}% Clean Data`; 
+                    console.log(response.length);
+
+                
 //            let x = document.getElementById("researchTable");
 //            x.remove();
 
@@ -131,16 +146,22 @@ function getAllResearch(){
 }
 
 function getDayBarChart(){
-    let chartStatus = Chart.getChart("barChart");
-    if (chartStatus != undefined) {
-        chartStatus.destroy();
-    }
+    // let chartStatus = Chart.getChart("barChart");
+    // if (chartStatus != undefined) {
+    //     chartStatus.destroy();
+    // }
     let xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 4 && xhr.status == 200) {
             let response = JSON.parse(xhr.responseText);
             const labels = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
             const data = [0, 0, 0, 0, 0, 0, 0];
+
+
+            let dirtyVsClean = (response.length/2000) * 100;
+            document.getElementById("salesByDay").innerHTML = `<b>Sales by Day: </b>${dirtyVsClean}% Clean Data`; 
+            console.log(response.length);
+        
             // put all dates in response into an array called dates
             for (let i = 0; i < response.length; i++) {
 //          datesArr.push(response.orderDate[i]);

@@ -69,7 +69,6 @@ let catUrl="http://localhost:8080/ETL-E-Commerce/order/category"
   }
 
 
-  }
 
     function getQ3Data(){
       //     Transactions failed:
@@ -86,11 +85,22 @@ let catUrl="http://localhost:8080/ETL-E-Commerce/order/category"
              globalResponse=response
              if(x<1){
              getCountrysAndDrDown(response,'2','3')
+
+             let dirtyVsClean = (response.length/2000) * 100;
+             document.getElementById("barChartHeader").innerHTML = `<b>Transactions per Month/Time,per Country
+             : </b>${dirtyVsClean}% Clean Data`; 
+                 console.log(response.length);
+
+                 let cleanVsDirty = (response.length/2000) * 100;
+             document.getElementById("ProductPop").innerHTML = `<b>Transactions per Category Selected,per Country
+             : </b>${cleanVsDirty}% Clean Data`; 
+                 console.log(response.length);
             }
             x++;
             if(document.getElementById("3").value=='All Countrys'||document.getElementById("select x category").value=='country'){
               arr=populateBarChart(response,10,document.getElementById("select x category").value);
               getCountrysAndDrDown(response,'2','3')
+              
             }else{
              arr=populateBarChart1(response,10,document.getElementById("select x category").value,document.getElementById("3").value);
             }

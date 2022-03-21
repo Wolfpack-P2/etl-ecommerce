@@ -49,7 +49,9 @@ function getAllFacts(){
             if (xhr.readyState == 4 && xhr.status == 200) {
                 let response = JSON.parse(xhr.responseText);
                 
-
+                let dirtyVsClean = (response.length/2000) * 100;
+            document.getElementById("tableHeader").innerHTML = `<b>Reports:</b>${dirtyVsClean}% Clean Data`; 
+                console.log(response.length);
                 factsArray = response;
                 console.log(factsArray);
                 getByCountry();
@@ -166,6 +168,12 @@ function getTxnChartData(){
         if (xhr.readyState == 4 && xhr.status == 200) {
             let response = JSON.parse(xhr.responseText);
             let labels = [];
+            let dirtyVsClean = (response.length/2000) * 100;
+            document.getElementById("pieChartHeader").innerHTML = `<b>Overall Transaction Statistics:</b> ${dirtyVsClean}% Clean Data`; 
+
+
+
+
             let data = [];
             for (let i = 0; i < response.length; i++) {
                 if (labels.indexOf(response[i].paymentTxnSuccess) == -1) {
@@ -220,6 +228,9 @@ function getTypeChartData(){
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 4 && xhr.status == 200) {
             let response = JSON.parse(xhr.responseText);
+
+            let dirtyVsClean = (response.length/2000) * 100;
+            document.getElementById("barchartHeader").innerHTML = `<b>Most Common Payment Types</b> ${dirtyVsClean}% Clean Data`; 
            
             arr = paymentType1(response);
             
