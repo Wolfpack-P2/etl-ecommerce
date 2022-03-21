@@ -283,13 +283,17 @@ function changeLabels(xData,value){
   }
   else if(value == "timeOfDay"){
     for (i = 0; i<xData.length;i++){
+      if (xData[i] == 0) {
+        xlabels.push("12 AM")
+      }
       if (xData[i] > 12) {
         newtime = xData[i] - 12;
         xlabels.push(newtime +' PM')
       }
-      if (xData[i] < 12) {
+      if (xData[i] < 12 && xData[i] > 0) {
         xlabels.push(xData[i]+' AM')
       }
+
     }
 
 
@@ -444,11 +448,12 @@ function createObjects(){
     datasets1.push(obj1);
   }
 
-
+  //time of day charts
   labels1=populateLineChart(globalResponse,document.getElementById("select x category1").value,
   document.getElementById(`${indForLineArr[0]}`).value)[0]
+  LineChrtLabels = changeLabels(labels1,document.getElementById("select x category1").value)
   data2={
-    labels:labels1,
+    labels:LineChrtLabels,//switch for new labels
     datasets:datasets1
   }
   data={
