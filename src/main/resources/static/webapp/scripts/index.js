@@ -45,7 +45,6 @@ async function login() {
     location.reload()
     await alert("Invalid Credentials")
   } */
-  //  getAllFacts();
   
 }
 
