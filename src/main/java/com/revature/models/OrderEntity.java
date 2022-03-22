@@ -35,6 +35,9 @@ public class OrderEntity {
     @Column(name="qty")
     private Integer qty;
 
+    @Column(name="payment_txn_id")
+    private Integer paymentTxnId;
+
     public Integer getOrderId() {
         return orderId;
     }
