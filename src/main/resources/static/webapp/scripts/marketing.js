@@ -80,20 +80,19 @@ let catUrl="http://localhost:8080/ETL-E-Commerce/order/category"
       xhr.onreadystatechange = function () {
           if (xhr.readyState == 4 && xhr.status == 200) {
               let response = JSON.parse(xhr.responseText);
-             console.log(response)
+              let dirtyVsClean = (response.length/2000) * 100;
+              document.getElementById("barChartHeader").innerHTML = `<b>Transactions per Month/Time,per Country
+              : </b>${dirtyVsClean}% Clean Data`;
+                  console.log(response.length);
+
+                  let cleanVsDirty = (response.length/2000) * 100;
+              document.getElementById("ProductPop").innerHTML = `<b>Transactions per Category Selected,per Country
+              : </b>${cleanVsDirty}% Clean Data`;
+                  console.log(response.length);
              globalResponse=response
              if(x<1){
              getCountrysAndDrDown(response,'2','3')
 
-             let dirtyVsClean = (response.length/2000) * 100;
-             document.getElementById("barChartHeader").innerHTML = `<b>Transactions per Month/Time,per Country
-             : </b>${dirtyVsClean}% Clean Data`; 
-                 console.log(response.length);
-
-                 let cleanVsDirty = (response.length/2000) * 100;
-             document.getElementById("ProductPop").innerHTML = `<b>Transactions per Category Selected,per Country
-             : </b>${cleanVsDirty}% Clean Data`; 
-                 console.log(response.length);
             }
             x++;
             if(document.getElementById("3").value=='All Countrys'||document.getElementById("select x category").value=='country'){

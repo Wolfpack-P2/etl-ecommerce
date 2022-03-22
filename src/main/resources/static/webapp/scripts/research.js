@@ -29,21 +29,19 @@ function overallSpent(){
             totalQty = 0;
             for(let i = 0; i < response.length; i++){
                 if(response[i].paymentTxnSuccess == 'Y'){
-                    totalSales += response[i].totalPrice;
+                    totalSales += (response[i].price * response[i].qty);
                     totalQty += response[i].qty;
                     transCount++;
                 }
             }
             let averageSales = (totalSales/transCount).toFixed(2);
-            console.log(averageSales);
             let averageQty = (totalQty/transCount).toFixed(0);
-            console.log(averageQty);
             document.getElementById("Q2").innerHTML = `<b>Average Sales:</b> ${averageSales}`;
             document.getElementById("Q1").innerHTML = `<b>Average Quantity:</b> ${averageQty}`;
        }
 
    }
-   xhr.open("GET", "http://localhost:8080/ETL-E-Commerce/research", true);
+   xhr.open("GET", "http://localhost:8080/ETL-E-Commerce/question3", true);
    xhr.send();
 }
 
