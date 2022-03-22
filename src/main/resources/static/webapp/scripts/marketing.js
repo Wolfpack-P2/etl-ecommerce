@@ -97,13 +97,13 @@ let catUrl="http://localhost:8080/ETL-E-Commerce/order/category"
             }
             x++;
             if(document.getElementById("3").value=='All Countrys'||document.getElementById("select x category").value=='country'){
-              arr=populateBarChart(response,10,document.getElementById("select x category").value);
+              arr=populateBarChart(response,12,document.getElementById("select x category").value);
               getCountrysAndDrDown(response,'2','3')
               
               xlabel = changeLabels(arr[0],document.getElementById("select x category").value);
               
             }else{
-             arr=populateBarChart1(response,10,document.getElementById("select x category").value,document.getElementById("3").value);
+             arr=populateBarChart1(response,12,document.getElementById("select x category").value,document.getElementById("3").value);
              xlabel = changeLabels(arr[0],document.getElementById("select x category").value);
             }
                   let ctx = document.getElementById('Q3').getContext('2d');
@@ -189,8 +189,13 @@ function populateBarChart1(data,value,breakdown,country){
         barHeightArr.push(newarr[i][1])
     }
     
-    packagedArray.push(labelArr.splice(labelArr.length-value-1,labelArr.length-1))
-    packagedArray.push(barHeightArr.splice(barHeightArr.length-value-1,barHeightArr.length-1))
+    if(breakdown!='productCategory'){
+        packagedArray.push(labelArr.splice(labelArr.length-value-1,labelArr.length-1))
+        packagedArray.push(barHeightArr.splice(barHeightArr.length-value-1,barHeightArr.length-1))
+    }else{
+        packagedArray.push(labelArr)
+        packagedArray.push(barHeightArr)
+    }
     console.log(map)
     console.log(packagedArray)
     return packagedArray;
@@ -245,8 +250,13 @@ function populateBarChart(data,value,breakdown){
         barHeightArr.push(newarr[i][1])
     }
     
-    packagedArray.push(labelArr.splice(labelArr.length-value-1,labelArr.length-1))
-    packagedArray.push(barHeightArr.splice(barHeightArr.length-value-1,barHeightArr.length-1))
+    if(breakdown!='productCategory'){
+        packagedArray.push(labelArr.splice(labelArr.length-value-1,labelArr.length-1))
+        packagedArray.push(barHeightArr.splice(barHeightArr.length-value-1,barHeightArr.length-1))
+    }else{
+        packagedArray.push(labelArr)
+        packagedArray.push(barHeightArr)
+    }
     console.log(map)
     console.log(packagedArray)
     return packagedArray;
